@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand Colors - We Move On Demand */
+    --midnight-blue: #151735;
+    --midnight-light: #242550;
+    --crimson: #a02135;
+    --crimson-bright: #c41e46;
+    
+    /* Background Colors */
+    --bg-primary: #F3F3F1;
+    --bg-secondary: #FFFFFF;
+    --bg-card: #F3F3F1;
+    
+    /* Text Colors */
+    --text-primary: #0A0A0A;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    
+    /* UI Colors */
+    --button-primary: #a02135;
+    --button-primary-hover: #c41e46;
+    --button-secondary-text: #c41e46;
+    --badge-bold: #242550;
+    --card-button: #151735;
+    
+    /* shadcn variables */
+    --background: 0 0% 95%;
+    --foreground: 0 0% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 350 66% 38%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 4%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 350 66% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 350 66% 38%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #F3F3F1;
+    color: #0A0A0A;
+    overflow-x: hidden;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  
+  ::selection {
+    background: #a02135;
+    color: white;
+  }
+}
+
+@layer components {
+  /* Primary Button */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-[#a02135] text-white text-xs font-semibold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] hover:scale-105 transition-all shadow-lg;
+  }
+  
+  /* Secondary Button */
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 text-[#c41e46] text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full hover:bg-[#a02135]/10 transition-colors;
+  }
+  
+  /* Badge Bold */
+  .badge-bold {
+    @apply inline-flex items-center gap-2 bg-[#242550] text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest;
+  }
+  
+  /* Section Label */
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-[0.25em] text-gray-500;
+  }
+  
+  /* Glass Card */
+  .glass-card {
+    @apply bg-[#F3F3F1] rounded-3xl;
+  }
+  
+  /* Navigation Link */
+  .nav-link {
+    @apply text-xs font-medium uppercase tracking-[0.15em] text-gray-600 hover:text-[#0A0A0A] transition-colors;
+  }
+  
+  /* Heading Styles */
+  .heading-hero {
+    @apply text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-[0.85] text-[#0A0A0A];
+  }
+  
+  .heading-section {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#0A0A0A];
+  }
+  
+  /* Paragraph Styles */
+  .paragraph-large {
+    @apply text-lg text-gray-600 leading-relaxed;
+  }
+  
+  .paragraph-base {
+    @apply text-base text-gray-500 leading-relaxed;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-[#a02135] to-[#c41e46] bg-clip-text text-transparent;
+  }
+}

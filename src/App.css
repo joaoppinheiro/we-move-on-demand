@@ -1,0 +1,106 @@
+/* App-specific styles */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F3F3F1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d1d1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a02135;
+}
+
+/* Calendar custom styles */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #a02135;
+  --rdp-background-color: rgba(160, 33, 53, 0.1);
+  margin: 0;
+}
+
+.rdp-day_selected {
+  background-color: #a02135 !important;
+}
+
+.rdp-day_selected:hover {
+  background-color: #c41e46 !important;
+}
+
+.rdp-button:hover {
+  background-color: rgba(160, 33, 53, 0.1) !important;
+}
+
+.rdp-caption_label {
+  color: #0A0A0A;
+  font-weight: 600;
+}
+
+.rdp-head_cell {
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+.rdp-day {
+  color: #0A0A0A;
+}
+
+.rdp-day_disabled {
+  color: #d1d1d1;
+}
+
+.rdp-nav_button {
+  color: #0A0A0A;
+}
+
+.rdp-nav_button:hover {
+  background-color: #F3F3F1;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Button hover glow */
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(160, 33, 53, 0.3);
+}
+
+/* Focus states */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #a02135;
+  box-shadow: 0 0 0 3px rgba(160, 33, 53, 0.1);
+}
+
+/* Selection color */
+::selection {
+  background: #a02135;
+  color: white;
+}
