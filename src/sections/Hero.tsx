@@ -122,19 +122,22 @@ export function Hero() {
             
             {/* Right - Form */}
             <div className="lg:col-span-3">
-              <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" onSubmit={(e) => { e.preventDefault(); setIsQuoteOpen(true); }}>
+              <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" onSubmit={(e) => { e.preventDefault(); const form = e.currentTarget; const data = new FormData(form); const name = data.get('name') as string; const phone = data.get('phone') as string; const email = data.get('email') as string; if (name && phone) { const subject = encodeURIComponent('Free Estimate Request - We Move On Demand'); const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nEmail: ${email || 'Not provided'}\n\nSubmitted from hero form.`); window.location.href = `mailto:move@wemoveondemand.com?subject=${subject}&body=${body}`; setIsQuoteOpen(true); } }}>
                 <input
                   type="text"
+                  name="name"
                   placeholder="Your name"
                   className="bg-white/10 border border-white/20 rounded-full px-5 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:border-white/40 transition-colors"
                 />
                 <input
                   type="tel"
+                  name="phone"
                   placeholder="Your phone"
                   className="bg-white/10 border border-white/20 rounded-full px-5 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:border-white/40 transition-colors"
                 />
                 <input
                   type="email"
+                  name="email"
                   placeholder="Your email"
                   className="bg-white/10 border border-white/20 rounded-full px-5 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:border-white/40 transition-colors"
                 />
@@ -160,19 +163,22 @@ export function Hero() {
               <p className="text-xs text-gray-500">Get your quote in minutes</p>
             </div>
           </div>
-          <form className="grid grid-cols-1 gap-3" onSubmit={(e) => { e.preventDefault(); setIsQuoteOpen(true); }}>
+          <form className="grid grid-cols-1 gap-3" onSubmit={(e) => { e.preventDefault(); const form = e.currentTarget; const data = new FormData(form); const name = data.get('name') as string; const phone = data.get('phone') as string; const email = data.get('email') as string; if (name && phone) { const subject = encodeURIComponent('Free Estimate Request - We Move On Demand'); const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nEmail: ${email || 'Not provided'}\n\nSubmitted from hero form.`); window.location.href = `mailto:move@wemoveondemand.com?subject=${subject}&body=${body}`; setIsQuoteOpen(true); } }}>
             <input
               type="text"
+              name="name"
               placeholder="Your name"
               className="bg-gray-100 border border-gray-200 rounded-full px-5 py-3 text-sm text-[#0A0A0A] placeholder:text-gray-400 focus:outline-none focus:border-[#a02135] transition-colors"
             />
             <input
               type="tel"
+              name="phone"
               placeholder="Your phone"
               className="bg-gray-100 border border-gray-200 rounded-full px-5 py-3 text-sm text-[#0A0A0A] placeholder:text-gray-400 focus:outline-none focus:border-[#a02135] transition-colors"
             />
             <input
               type="email"
+              name="email"
               placeholder="Your email"
               className="bg-gray-100 border border-gray-200 rounded-full px-5 py-3 text-sm text-[#0A0A0A] placeholder:text-gray-400 focus:outline-none focus:border-[#a02135] transition-colors"
             />

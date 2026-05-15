@@ -37,31 +37,31 @@ export function About() {
 
           {/* Right Column - Content */}
           <div>
-            <span className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500 mb-4 block">About Us</span>
+            <span className="section-label mb-4 block">About Us</span>
             
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0A0A0A] mb-6">
+            <h2 className="heading-section mb-6">
               Trusted Moving Partner
               <br />
               <span className="text-[#a02135]">Since 2009</span>
             </h2>
             
             <div className="space-y-4 mb-8">
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="paragraph-large">
                 <strong className="text-[#0A0A0A]">Attention:</strong> Moving doesn't have to be stressful. 
                 At We Move On Demand, we've helped over <strong className="text-[#0A0A0A]">16000+ customers</strong> relocate 
                 across Florida with zero hassle and complete peace of mind. Founded and registered in 2009.
               </p>
-              <p className="text-base text-gray-500 leading-relaxed">
+              <p className="paragraph-base">
                 <strong className="text-[#0A0A0A]">Interest:</strong> Our team of professional movers 
                 treats your belongings like their own. From delicate antiques to heavy office 
                 equipment, we have the expertise and equipment to handle it all.
               </p>
-              <p className="text-base text-gray-500 leading-relaxed">
+              <p className="paragraph-base">
                 <strong className="text-[#0A0A0A]">Desire:</strong> Imagine settling into your new home 
                 or office without lifting a finger. Our white-glove service includes packing, 
                 moving, unpacking, and even furniture assembly.
               </p>
-              <p className="text-base text-gray-500 leading-relaxed">
+              <p className="paragraph-base">
                 <strong className="text-[#0A0A0A]">Action:</strong> Don't wait until the last minute. 
                 Book your move today and get a free estimate. Call us now at{' '}
                 <a href="tel:5612127570" className="text-[#a02135] font-semibold hover:underline">
@@ -94,7 +94,7 @@ export function About() {
             </div>
 
             {/* CTA */}
-            <a href="tel:5612127570" className="inline-flex items-center gap-2 bg-[#a02135] text-white text-xs font-medium uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] hover:scale-105 transition-all shadow-lg">
+            <a href="tel:5612127570" className="btn-primary">
               <Phone className="w-4 h-4" />
               Talk to the Owner
             </a>

@@ -1,38 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { Header } from './sections/Header';
 import { Hero } from './sections/Hero';
-import { Services } from './sections/Services';
-import { About } from './sections/About';
-import { BBBExperts } from './sections/BBBExperts';
-import { Testimonials } from './sections/Testimonials';
-import { FAQ } from './sections/FAQ';
-import { FreeEstimate } from './sections/FreeEstimate';
 import { Footer } from './sections/Footer';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import './App.css';
+
+const Services = lazy(() => import('./sections/Services').then(m => ({ default: m.Services })));
+const About = lazy(() => import('./sections/About').then(m => ({ default: m.About })));
+const BBBExperts = lazy(() => import('./sections/BBBExperts').then(m => ({ default: m.BBBExperts })));
+const Testimonials = lazy(() => import('./sections/Testimonials').then(m => ({ default: m.Testimonials })));
+const FAQ = lazy(() => import('./sections/FAQ').then(m => ({ default: m.FAQ })));
+const FreeEstimate = lazy(() => import('./sections/FreeEstimate').then(m => ({ default: m.FreeEstimate })));
 
 function App() {
   useEffect(() => {
-    // Set page title
     document.title = 'We Move On Demand - Top Moving Services in Florida';
-    
-    // Smooth scroll for anchor links
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a[href^="#"]');
-      if (anchor) {
-        const href = anchor.getAttribute('href');
-        if (href && href !== '#') {
-          e.preventDefault();
-          const element = document.querySelector(href);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      }
-    };
-    
-    document.addEventListener('click', handleAnchorClick);
-    return () => document.removeEventListener('click', handleAnchorClick);
   }, []);
 
   return (
@@ -40,12 +22,36 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <Services />
-        <About />
-        <BBBExperts />
-        <Testimonials />
-        <FAQ />
-        <FreeEstimate />
+        <ErrorBoundary>
+          <Suspense fallback={<div className="h-24 bg-white" />}>
+            <Services />
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="h-24 bg-[#F3F3F1]" />}>
+            <About />
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="h-24 bg-white" />}>
+            <BBBExperts />
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="h-24 bg-white" />}>
+            <Testimonials />
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="h-24 bg-[#F3F3F1]" />}>
+            <FAQ />
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="h-24 bg-white" />}>
+            <FreeEstimate />
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>

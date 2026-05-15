@@ -45,11 +45,11 @@ export function Services() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500 mb-4 block">What We Offer</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0A0A0A] mb-6">
+          <span className="section-label mb-4 block">What We Offer</span>
+          <h2 className="heading-section mb-6">
             Our <span className="text-[#a02135]">Services</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="paragraph-large max-w-2xl mx-auto">
             From local moves to statewide relocations, we provide comprehensive moving 
             solutions tailored to your needs. Experience the difference of a 5-star moving company.
           </p>
@@ -92,7 +92,7 @@ export function Services() {
           <p className="text-gray-600 mb-4">
             Not sure which service you need? Let's talk about your move.
           </p>
-          <a href="tel:5612127570" className="inline-flex items-center gap-2 bg-[#0A0A0A] text-white text-xs font-medium uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#a02135] hover:scale-105 transition-all shadow-lg">
+          <a href="tel:5612127570" className="btn-primary">
             <ArrowRight className="w-4 h-4" />
             Get a Free Consultation
           </a>

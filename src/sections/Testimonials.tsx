@@ -55,11 +55,11 @@ export function Testimonials() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500 mb-4 block">Testimonials</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0A0A0A] mb-6 whitespace-nowrap">
+          <span className="section-label mb-4 block">Testimonials</span>
+          <h2 className="heading-section mb-6 whitespace-nowrap">
             What Our <span className="text-[#a02135]">Clients Say</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="paragraph-large max-w-2xl mx-auto">
             Don't just take our word for it. Here's what over 600 satisfied customers 
             have to say about their experience with We Move On Demand.
           </p>

@@ -13,6 +13,11 @@ export function FreeEstimate() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.phone) {
+      const subject = encodeURIComponent('Free Estimate Request - We Move On Demand');
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email || 'Not provided'}\n\nSubmitted from website form.`
+      );
+      window.location.href = `mailto:move@wemoveondemand.com?subject=${subject}&body=${body}`;
       setIsSubmitted(true);
     }
   };
@@ -22,11 +27,11 @@ export function FreeEstimate() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-10">
-          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500 mb-4 block">Get Started</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0A0A0A] mb-4">
+          <span className="section-label mb-4 block">Get Started</span>
+          <h2 className="heading-section mb-4">
             Get Your <span className="text-[#a02135]">Free Estimate</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-xl mx-auto">
+          <p className="paragraph-large max-w-xl mx-auto">
             Fill in your details and our team will contact you within 24 hours.
           </p>
         </div>

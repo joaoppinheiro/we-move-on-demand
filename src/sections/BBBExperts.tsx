@@ -79,7 +79,7 @@ export function BBBExperts() {
 
                 {/* BBB Profile Button */}
                 <a 
-                  href="https://www.bbb.org/us/tx/richardson/profile/heating-and-air-conditioning/service-experts-0875-19000269"
+                  href="https://www.bbb.org/us/fl/boca-raton/profile/movers/we-move-on-demand-0653-90345921"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-semibold uppercase tracking-widest px-5 py-3 rounded-full hover:bg-[#c41e46] hover:scale-105 transition-all shadow-lg whitespace-nowrap w-full"

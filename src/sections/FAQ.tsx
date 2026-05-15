@@ -44,11 +44,11 @@ export function FAQ() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header - Single Column */}
         <div className="text-center mb-10">
-          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500 mb-4 block">FAQ</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0A0A0A] mb-4">
+          <span className="section-label mb-4 block">FAQ</span>
+          <h2 className="heading-section mb-4">
             Frequently Asked <span className="text-[#a02135]">Questions</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-xl mx-auto">
+          <p className="paragraph-large max-w-xl mx-auto">
             Got questions? We've got answers. If you don't find what you're looking for, 
             feel free to reach out to us directly.
           </p>
