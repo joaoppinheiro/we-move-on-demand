@@ -7,7 +7,6 @@ import './App.css';
 
 const Services = lazy(() => import('./sections/Services').then(m => ({ default: m.Services })));
 const About = lazy(() => import('./sections/About').then(m => ({ default: m.About })));
-const BBBExperts = lazy(() => import('./sections/BBBExperts').then(m => ({ default: m.BBBExperts })));
 const Testimonials = lazy(() => import('./sections/Testimonials').then(m => ({ default: m.Testimonials })));
 const RealMoves = lazy(() => import('./sections/RealMoves').then(m => ({ default: m.RealMoves })));
 const FAQ = lazy(() => import('./sections/FAQ').then(m => ({ default: m.FAQ })));
@@ -31,11 +30,6 @@ function App() {
         <ErrorBoundary>
           <Suspense fallback={<div className="h-24 bg-[#F3F3F1]" />}>
             <About />
-          </Suspense>
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <Suspense fallback={<div className="h-24 bg-white" />}>
-            <BBBExperts />
           </Suspense>
         </ErrorBoundary>
         <ErrorBoundary>

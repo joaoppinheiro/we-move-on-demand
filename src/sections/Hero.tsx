@@ -1,19 +1,20 @@
 import { useState } from 'react';
-import { ArrowRight, Phone, Star, AlertCircle, Loader2, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Phone, Star, Award, MapPin, AlertCircle, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useQuoteSubmit } from '@/hooks/useQuoteSubmit';
 import { BBB_PROFILE_URL, PHONE_TEL } from '@/lib/constants';
 
-function HeroQuoteForm({ onSuccess }: { onSuccess: () => void }) {
-  const [fields, setFields] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    movingDate: '',
-    fromZip: '',
-    toZip: '',
-  });
-  const { submit, isLoading, state, errorMessage } = useQuoteSubmit('hero-primary');
+function HeroQuickForm({ variant, onSuccess }: { variant: 'desktop' | 'mobile'; onSuccess: () => void }) {
+  const [fields, setFields] = useState({ name: '', phone: '', email: '' });
+  const { submit, isLoading, state, errorMessage } = useQuoteSubmit(`hero-${variant}`);
+
+  const dark = variant === 'desktop';
+  const inputCls = dark
+    ? 'bg-white/10 border border-white/20 rounded-full px-5 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:border-white/40 transition-colors disabled:opacity-60'
+    : 'bg-gray-100 border border-gray-200 rounded-full px-5 py-3 text-sm text-[#0A0A0A] placeholder:text-gray-400 focus:outline-none focus:border-[#a02135] transition-colors disabled:opacity-60';
+  const btnCls = dark
+    ? 'inline-flex items-center justify-center gap-2 bg-white text-[#a02135] text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-white/90 hover:scale-105 transition-all shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100'
+    : 'inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] hover:scale-105 transition-all shadow-lg whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100';
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,117 +22,62 @@ function HeroQuoteForm({ onSuccess }: { onSuccess: () => void }) {
     const ok = await submit(fields);
     if (ok) {
       onSuccess();
-      setFields({ name: '', phone: '', email: '', movingDate: '', fromZip: '', toZip: '' });
+      setFields({ name: '', phone: '', email: '' });
     }
   };
 
-  const inputCls =
-    'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[#0A0A0A] placeholder:text-gray-400 focus:outline-none focus:border-[#a02135] focus:ring-2 focus:ring-[#a02135]/10 transition-all disabled:opacity-60';
+  const gridCls = variant === 'desktop'
+    ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'
+    : 'grid grid-cols-1 gap-3';
 
   return (
-    <div className="relative bg-white rounded-3xl shadow-2xl shadow-[#a02135]/10 border border-gray-100 p-6 lg:p-8">
-      {/* Header */}
-      <div className="mb-5">
-        <div className="inline-flex items-center gap-2 bg-[#a02135]/10 text-[#a02135] text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          Free • No Obligation
-        </div>
-        <h2 className="text-2xl lg:text-3xl font-bold text-[#0A0A0A] tracking-tight leading-tight">
-          Get your free moving quote
-          <br />
-          <span className="text-[#a02135]">in minutes.</span>
-        </h2>
-      </div>
-
-      <form onSubmit={onSubmit} className="space-y-3">
-        <input
-          type="text"
-          required
-          value={fields.name}
-          onChange={(e) => setFields({ ...fields, name: e.target.value })}
-          placeholder="Full name *"
-          disabled={isLoading}
-          className={inputCls}
-        />
-        <input
-          type="tel"
-          required
-          value={fields.phone}
-          onChange={(e) => setFields({ ...fields, phone: e.target.value })}
-          placeholder="Phone *"
-          disabled={isLoading}
-          className={inputCls}
-        />
-        <input
-          type="email"
-          value={fields.email}
-          onChange={(e) => setFields({ ...fields, email: e.target.value })}
-          placeholder="Email"
-          disabled={isLoading}
-          className={inputCls}
-        />
-
-        <div className="grid grid-cols-2 gap-3">
-          <input
-            type="text"
-            inputMode="numeric"
-            maxLength={5}
-            value={fields.fromZip}
-            onChange={(e) => setFields({ ...fields, fromZip: e.target.value })}
-            placeholder="From ZIP"
-            disabled={isLoading}
-            className={inputCls}
-          />
-          <input
-            type="text"
-            inputMode="numeric"
-            maxLength={5}
-            value={fields.toZip}
-            onChange={(e) => setFields({ ...fields, toZip: e.target.value })}
-            placeholder="To ZIP"
-            disabled={isLoading}
-            className={inputCls}
-          />
-        </div>
-
-        <input
-          type="date"
-          value={fields.movingDate}
-          onChange={(e) => setFields({ ...fields, movingDate: e.target.value })}
-          disabled={isLoading}
-          className={`${inputCls} text-gray-500`}
-        />
-
-        {state === 'error' && (
-          <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700">
-            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-            <span>{errorMessage}</span>
-          </div>
+    <form className={gridCls} onSubmit={onSubmit}>
+      <input
+        type="text"
+        required
+        value={fields.name}
+        onChange={(e) => setFields({ ...fields, name: e.target.value })}
+        placeholder="Your name"
+        disabled={isLoading}
+        className={inputCls}
+      />
+      <input
+        type="tel"
+        required
+        value={fields.phone}
+        onChange={(e) => setFields({ ...fields, phone: e.target.value })}
+        placeholder="Your phone"
+        disabled={isLoading}
+        className={inputCls}
+      />
+      <input
+        type="email"
+        value={fields.email}
+        onChange={(e) => setFields({ ...fields, email: e.target.value })}
+        placeholder="Your email"
+        disabled={isLoading}
+        className={inputCls}
+      />
+      <button type="submit" className={btnCls} disabled={isLoading || !fields.name || !fields.phone}>
+        {isLoading ? (
+          <>
+            <Loader2 className="w-4 h-4 flex-shrink-0 animate-spin" />
+            Sending...
+          </>
+        ) : (
+          <>
+            Get Estimate
+            <ArrowRight className="w-4 h-4 flex-shrink-0" />
+          </>
         )}
-
-        <button
-          type="submit"
-          className="w-full inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-bold uppercase tracking-widest px-6 py-3.5 rounded-full hover:bg-[#c41e46] hover:scale-[1.02] transition-all shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
-          disabled={isLoading || !fields.name || !fields.phone}
-        >
-          {isLoading ? (
-            <>
-              <Loader2 className="w-4 h-4 animate-spin" />
-              Sending...
-            </>
-          ) : (
-            <>
-              Get My Free Quote
-              <ArrowRight className="w-4 h-4" />
-            </>
-          )}
-        </button>
-
-        <p className="text-[10px] text-gray-400 text-center pt-1 leading-relaxed">
-          No Hidden Fees. Honest Pricing. Every Time.
-        </p>
-      </form>
-    </div>
+      </button>
+      {state === 'error' && (
+        <div className={`sm:col-span-2 lg:col-span-4 flex items-start gap-2 px-4 py-2 rounded-full text-xs ${dark ? 'bg-white/10 text-white' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+          <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+          <span>{errorMessage}</span>
+        </div>
+      )}
+    </form>
   );
 }
 
@@ -139,86 +85,138 @@ export function Hero() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
 
   return (
-    <section id="hero" className="relative bg-[#F3F3F1] overflow-hidden">
+    <section id="hero" className="relative min-h-screen bg-[#F3F3F1] overflow-hidden">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-30 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-[#a02135]/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#242550]/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-28 lg:pt-32 pb-16 lg:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Left Column - Copy */}
-          <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500 mb-5">
-              5 Star Rated Moving Company • Florida
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[calc(100vh-200px)]">
+          {/* Left Column - Content */}
+          <div className="flex flex-col justify-center order-2 lg:order-1">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500 mb-6">
+              5 Star Rated Moving Company
             </p>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold tracking-tighter leading-[0.9] text-[#0A0A0A] mb-6">
-              Stress-Free
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-[0.9] text-[#0A0A0A] mb-6">
+              WE MOVE
               <br />
               <span className="relative inline-block">
-                Moving Starts Here
+                ON DEMAND
                 <span className="absolute -top-2 -right-2 lg:-top-3 lg:-right-4 bg-[#a02135] text-white px-2 py-0.5 lg:px-3 lg:py-1 rounded-full text-[0.5rem] lg:text-[0.6rem] font-bold uppercase tracking-widest shadow-lg transform rotate-3 z-10">
                   Talk to the Owner
                 </span>
               </span>
             </h1>
 
-            <p className="text-lg text-gray-600 leading-relaxed mb-6 max-w-xl">
-              For a <span className="text-[#a02135] font-semibold">5-star move</span>, choose a 5-star company
-              known for care and attention. Serving all of Florida — residential and commercial.
+            <p className="text-lg text-gray-600 leading-relaxed mb-4 max-w-md">
+              For a <span className="text-[#a02135] font-semibold">5-star move</span>, choose a 5-star company known for care and attention.
+              We have the right plan for you.
             </p>
 
-            {/* Trust strip */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8">
-              <div className="flex items-center gap-2">
+            <p className="text-base text-gray-500 leading-relaxed mb-8 max-w-lg">
+              Serving all of Florida with professional residential and commercial moving services.
+              Licensed & Insured <span className="text-[#a02135] font-semibold">FL Reg: IM1733</span>
+            </p>
+
+            <div className="flex flex-wrap gap-4 mb-10">
+              <a href={PHONE_TEL} className="inline-flex items-center gap-2 bg-[#0A0A0A] text-white text-xs font-medium uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#a02135] hover:scale-105 transition-all shadow-lg">
+                <Phone className="w-4 h-4" />
+                Call Now
+              </a>
+              <a href="#services" className="inline-flex items-center gap-2 text-[#a02135] text-xs font-medium uppercase tracking-widest px-4 py-3 rounded-full hover:bg-[#a02135]/10 transition-colors">
+                Our Services
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+
+            <div className="hidden md:flex flex-wrap items-center gap-8">
+              <div className="flex items-center gap-3">
                 <div className="flex text-yellow-500">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-current" />
                   ))}
                 </div>
-                <span className="text-sm font-semibold text-[#0A0A0A]">16,000+ Customers</span>
+                <div>
+                  <p className="text-xl font-bold text-[#0A0A0A]">16000+</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider">Customers</p>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#a02135]" />
-                <span className="text-sm text-gray-600">Same Trusted Crew For Years</span>
+              <div className="flex items-center gap-3">
+                <MapPin className="w-5 h-5 text-[#a02135]" />
+                <div>
+                  <p className="text-sm font-semibold text-[#0A0A0A]">All Florida</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider">Coverage</p>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#a02135]" />
-                <span className="text-sm text-gray-600">Licensed & Insured (FL Reg: IM1733)</span>
-              </div>
-            </div>
-
-            {/* BBB A+ + CTA */}
-            <div className="flex flex-wrap items-center gap-4">
               <a
                 href={BBB_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 bg-white border border-gray-200 rounded-2xl pl-3 pr-4 py-2 hover:shadow-md transition-shadow"
-                aria-label="View our BBB A+ accredited profile"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                aria-label="View our BBB Accredited A+ profile"
               >
-                <img src="/images/bbb-logo.png" alt="" className="h-9 w-auto" />
-                <div className="leading-tight">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#a02135]">A+ Rated</p>
-                  <p className="text-[10px] text-gray-500">BBB Accredited Since 2009</p>
-                </div>
-              </a>
-              <a
-                href={PHONE_TEL}
-                className="inline-flex items-center gap-2 bg-[#0A0A0A] text-white text-xs font-medium uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#a02135] hover:scale-105 transition-all shadow-lg"
-              >
-                <Phone className="w-4 h-4" />
-                Call Now
+                <img src="/images/bbb-logo.png" alt="BBB A+ Rated" className="h-10 w-auto" />
               </a>
             </div>
           </div>
 
-          {/* Right Column - Quote Form (above the fold) */}
-          <div className="lg:col-span-5 order-1 lg:order-2">
-            <HeroQuoteForm onSuccess={() => setIsQuoteOpen(true)} />
+          {/* Right Column - Eduardo Image */}
+          <div className="relative flex items-center justify-center order-1 lg:order-2">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#a02135]/10 to-[#242550]/10 rounded-full blur-3xl scale-75" />
+
+              <img
+                src="/images/eduardo-hero.png"
+                alt="Eduardo - Owner of We Move On Demand"
+                className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto drop-shadow-2xl"
+              />
+
+              <div className="absolute bottom-16 right-0 z-20">
+                <div className="px-4 py-2 rounded-full border border-[#0A0A0A]/10 bg-white/80 backdrop-blur-xl text-[#0A0A0A] text-[0.6rem] font-semibold uppercase tracking-widest shadow-lg">
+                  5 Star Service
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+
+      {/* Free Estimate Form - Desktop Red Strip */}
+      <div className="relative bg-[#a02135] border-t border-[#a02135] hidden md:block">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-center">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                <Award className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white">Free Estimate</h3>
+                <p className="text-sm text-white/70">Get your quote in minutes</p>
+              </div>
+            </div>
+            <div className="lg:col-span-3">
+              <HeroQuickForm variant="desktop" onSuccess={() => setIsQuoteOpen(true)} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Free Estimate Form - Mobile White Strip */}
+      <div className="relative bg-white border-t border-gray-200 md:hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 bg-[#a02135] rounded-xl flex items-center justify-center">
+              <Award className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-[#0A0A0A]">Free Estimate</h3>
+              <p className="text-xs text-gray-500">Get your quote in minutes</p>
+            </div>
+          </div>
+          <HeroQuickForm variant="mobile" onSuccess={() => setIsQuoteOpen(true)} />
         </div>
       </div>
 
@@ -232,10 +230,7 @@ export function Hero() {
             We've received your request. Our team will contact you within 24 hours to discuss your move.
           </p>
           <div className="flex gap-4 mt-4">
-            <a
-              href={PHONE_TEL}
-              className="inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-medium uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] transition-all flex-1"
-            >
+            <a href={PHONE_TEL} className="inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-medium uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] transition-all flex-1">
               <Phone className="w-4 h-4" />
               Call Now
             </a>
