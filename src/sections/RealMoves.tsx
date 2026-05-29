@@ -18,19 +18,6 @@ const gallery: PhotoSlot[] = [
   { id: 'happy-customer', label: 'Real Customers', hint: 'Smiling customer with Eduardo' },
 ];
 
-const beforeAfterPairs: { id: string; beforeHint: string; afterHint: string }[] = [
-  {
-    id: 'before-after-1',
-    beforeHint: 'Cluttered moving day chaos',
-    afterHint: 'Organized new home',
-  },
-  {
-    id: 'before-after-2',
-    beforeHint: 'Empty new place',
-    afterHint: 'Fully set up by our crew',
-  },
-];
-
 function Placeholder({
   id,
   label,
@@ -110,44 +97,6 @@ export function RealMoves() {
             {gallery.map((slot) => (
               <div key={slot.id} className="aspect-[4/5]">
                 <Placeholder id={slot.id} label={slot.label} hint={slot.hint} type="photo" />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Before / After — uniform 2-col landscape (16/10) per pair, each pair is its own row */}
-        <div className="mb-12 lg:mb-16">
-          <div className="flex items-end justify-between mb-5">
-            <h3 className="text-2xl lg:text-3xl font-bold text-[#0A0A0A]">Before & After</h3>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hidden sm:block">
-              Side-by-Side
-            </span>
-          </div>
-          <div className="space-y-4 lg:space-y-6">
-            {beforeAfterPairs.map((pair) => (
-              <div key={pair.id} className="grid grid-cols-2 gap-4 lg:gap-6">
-                <div className="relative aspect-[16/10]">
-                  <span className="absolute top-3 left-3 z-10 bg-[#0A0A0A] text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full">
-                    Before
-                  </span>
-                  <Placeholder
-                    id={`${pair.id}-before`}
-                    label="Before"
-                    hint={pair.beforeHint}
-                    type="photo"
-                  />
-                </div>
-                <div className="relative aspect-[16/10]">
-                  <span className="absolute top-3 left-3 z-10 bg-[#a02135] text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full">
-                    After
-                  </span>
-                  <Placeholder
-                    id={`${pair.id}-after`}
-                    label="After"
-                    hint={pair.afterHint}
-                    type="photo"
-                  />
-                </div>
               </div>
             ))}
           </div>

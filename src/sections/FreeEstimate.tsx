@@ -147,12 +147,12 @@ export function FreeEstimate() {
             </form>
           </div>
 
-          {/* Eduardo Image Column — matches form height via flex + object-cover */}
-          <div className="hidden lg:flex rounded-3xl overflow-hidden bg-[#F3F3F1]">
+          {/* Eduardo Image Column — full PNG on white, contained, anchored bottom-center */}
+          <div className="hidden lg:flex items-end justify-center">
             <img
               src="/images/eduardo-3.png"
               alt="Eduardo - We Move On Demand"
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full max-h-full object-contain object-bottom"
             />
           </div>
         </div>
