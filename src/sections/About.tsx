@@ -1,4 +1,4 @@
-import { Shield, Clock, Award, Users, CheckCircle, Phone, MapPin, ExternalLink, Star } from 'lucide-react';
+import { Shield, Award, Users, CheckCircle, Phone, MapPin, ExternalLink, Star } from 'lucide-react';
 import { BBB_PROFILE_URL, PHONE_TEL } from '@/lib/constants';
 
 const stats = [
