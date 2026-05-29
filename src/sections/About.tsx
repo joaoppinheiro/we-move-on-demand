@@ -1,4 +1,5 @@
 import { Shield, Clock, Award, Users, CheckCircle, Phone, MapPin } from 'lucide-react';
+import { BBB_PROFILE_URL } from '@/lib/constants';
 
 const stats = [
   { value: '16000+', label: 'Happy Customers', icon: Users },
@@ -10,7 +11,7 @@ const stats = [
 const features = [
   'Licensed & Insured (FL Reg: IM1733)',
   'Same-Day Service Available',
-  'No Hidden Fees - Transparent Pricing',
+  'No Hidden Fees. Honest Pricing. Every Time.',
   'Professional Packing & Unpacking',
   'Secure Storage Solutions',
   'Statewide Florida Coverage',
@@ -76,7 +77,16 @@ export function About() {
 
             {/* Address & BBB - BBB first (desktop), address only (mobile) */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-8 p-4 bg-white rounded-2xl">
-              <img src="/images/bbb-logo.png" alt="BBB A+ Rated Business" className="hidden sm:block h-10 w-auto flex-shrink-0" />
+              <a
+                href={BBB_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:flex items-center gap-2 hover:opacity-80 transition-opacity"
+                aria-label="View our BBB Accredited A+ profile"
+              >
+                <img src="/images/bbb-logo.png" alt="BBB A+ Rated Business" className="h-10 w-auto flex-shrink-0" />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#a02135]">A+ Since 2009</span>
+              </a>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <MapPin className="w-4 h-4 text-[#a02135] flex-shrink-0" />
                 29 NW 13th St Suite 22 1, Boca Raton, FL 33432

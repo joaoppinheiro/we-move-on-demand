@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
+import { BBB_PROFILE_URL } from '@/lib/constants';
 
 const quickLinks = [
   { label: 'Home', href: '#hero' },
@@ -127,15 +128,22 @@ export function Footer() {
                 <span>29 NW 13th St Suite 22 1<br />Boca Raton, FL 33432</span>
               </div>
               
-              <div className="mt-4 p-4 bg-white/5 rounded-xl border border-white/10">
+              <a
+                href={BBB_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 p-4 bg-white/5 rounded-xl border border-white/10 hover:border-white/20 hover:bg-white/10 transition-colors block"
+                aria-label="View our BBB Accredited A+ profile"
+              >
                 <div className="flex items-center gap-3 mb-2">
                   <img src="/images/bbb-logo-white.png" alt="BBB A+ Rated" className="h-8 w-auto opacity-80" />
                   <div>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider">Licensed & Insured</p>
-                    <p className="text-lg font-bold text-[#a02135]">FL Reg: IM1733</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">BBB Accredited Since 2009</p>
+                    <p className="text-lg font-bold text-[#a02135]">A+ Rating · FL Reg: IM1733</p>
                   </div>
                 </div>
-              </div>
+                <p className="text-[10px] text-gray-500 uppercase tracking-widest">No Hidden Fees · Honest Pricing</p>
+              </a>
             </div>
           </div>
         </div>

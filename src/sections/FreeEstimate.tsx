@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, CheckCircle, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, CheckCircle, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useQuoteSubmit } from '@/hooks/useQuoteSubmit';
 
 export function FreeEstimate() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -9,17 +10,13 @@ export function FreeEstimate() {
     phone: '',
     email: '',
   });
+  const { submit, isLoading, state, errorMessage, reset } = useQuoteSubmit('free-estimate-section');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name && formData.phone) {
-      const subject = encodeURIComponent('Free Estimate Request - We Move On Demand');
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email || 'Not provided'}\n\nSubmitted from website form.`
-      );
-      window.location.href = `mailto:move@wemoveondemand.com?subject=${subject}&body=${body}`;
-      setIsSubmitted(true);
-    }
+    if (!formData.name || !formData.phone) return;
+    const ok = await submit(formData);
+    if (ok) setIsSubmitted(true);
   };
 
   return (
@@ -63,7 +60,7 @@ export function FreeEstimate() {
                   className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[#0A0A0A] placeholder:text-gray-400 focus:outline-none focus:border-[#a02135] transition-colors"
                 />
               </div>
-              
+
               <div>
                 <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5 block">
                   Phone Number *
@@ -77,7 +74,7 @@ export function FreeEstimate() {
                   className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[#0A0A0A] placeholder:text-gray-400 focus:outline-none focus:border-[#a02135] transition-colors"
                 />
               </div>
-              
+
               <div>
                 <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5 block">
                   Email Address
@@ -91,14 +88,34 @@ export function FreeEstimate() {
                 />
               </div>
 
+              {state === 'error' && (
+                <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] hover:scale-105 transition-all shadow-lg w-full whitespace-nowrap"
-                disabled={!formData.name || !formData.phone}
+                className="inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] hover:scale-105 transition-all shadow-lg w-full whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                disabled={!formData.name || !formData.phone || isLoading}
               >
-                <ArrowRight className="w-4 h-4 flex-shrink-0" />
-                Get My Free Estimate
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 flex-shrink-0 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                    Get My Free Estimate
+                  </>
+                )}
               </button>
+
+              <p className="text-[10px] text-gray-400 text-center pt-1">
+                No Hidden Fees. Honest Pricing. Every Time.
+              </p>
             </form>
           </div>
 
@@ -113,7 +130,7 @@ export function FreeEstimate() {
                 <p className="text-base font-bold text-[#0A0A0A] truncate">(561) 212-7570</p>
               </div>
             </a>
-            
+
             <a href="mailto:move@wemoveondemand.com" className="flex items-center gap-3 p-4 bg-[#F3F3F1] rounded-2xl hover:shadow-md transition-shadow">
               <div className="w-10 h-10 bg-[#a02135]/10 rounded-xl flex items-center justify-center flex-shrink-0">
                 <Mail className="w-5 h-5 text-[#a02135]" />
@@ -123,7 +140,7 @@ export function FreeEstimate() {
                 <p className="text-sm font-bold text-[#0A0A0A] truncate">move@wemoveondemand.com</p>
               </div>
             </a>
-            
+
             <div className="flex items-center gap-3 p-4 bg-[#F3F3F1] rounded-2xl">
               <div className="w-10 h-10 bg-[#a02135]/10 rounded-xl flex items-center justify-center flex-shrink-0">
                 <MapPin className="w-5 h-5 text-[#a02135]" />
@@ -133,7 +150,7 @@ export function FreeEstimate() {
                 <p className="text-sm font-bold text-[#0A0A0A]">Boca Raton, FL 33432</p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-3 p-4 bg-[#F3F3F1] rounded-2xl">
               <div className="w-10 h-10 bg-[#a02135]/10 rounded-xl flex items-center justify-center flex-shrink-0">
                 <Clock className="w-5 h-5 text-[#a02135]" />
@@ -148,7 +165,7 @@ export function FreeEstimate() {
       </div>
 
       {/* Success Dialog */}
-      <Dialog open={isSubmitted} onOpenChange={setIsSubmitted}>
+      <Dialog open={isSubmitted} onOpenChange={(open) => { setIsSubmitted(open); if (!open) { reset(); setFormData({ name: '', phone: '', email: '' }); } }}>
         <DialogContent className="bg-white border-gray-200 text-[#0A0A0A] max-w-md">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold flex items-center gap-3">

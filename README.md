@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
+# We Move On Demand — Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19 + Vite + TypeScript site for We Move On Demand, deployed on Vercel.
 
-Currently, two official plugins are available:
+## Lead capture (Fase 1 — DONE)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+All "Request a Quote" / "Free Estimate" forms POST to the Vercel serverless function
+[`api/quote.ts`](api/quote.ts), which sends the lead via **Resend** to `move@wemoveondemand.com`
+and logs it as a structured `[lead]` JSON line in Vercel logs (backup).
 
-## React Compiler
+Forms wired:
+- [src/sections/Hero.tsx](src/sections/Hero.tsx) — desktop quick form
+- [src/sections/Hero.tsx](src/sections/Hero.tsx) — mobile quick form
+- [src/sections/FreeEstimate.tsx](src/sections/FreeEstimate.tsx) — full form section
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Shared submit hook: [src/hooks/useQuoteSubmit.ts](src/hooks/useQuoteSubmit.ts).
 
-## Expanding the ESLint configuration
+### Required Vercel environment variables
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Variable          | Purpose                                                                 |
+| ----------------- | ----------------------------------------------------------------------- |
+| `RESEND_API_KEY`  | Resend API key — create at https://resend.com/api-keys                  |
+| `LEAD_TO_EMAIL`   | Recipient. Default `move@wemoveondemand.com`                            |
+| `LEAD_FROM_EMAIL` | Verified sender. Default `leads@wemoveondemand.com`                     |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Deploy checklist
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. In **Resend**: add `wemoveondemand.com` as a domain, verify SPF/DKIM via the DNS records Resend shows.
+2. Create an API key, copy it.
+3. In **Vercel → Project → Settings → Environment Variables**, add the 3 vars above (Production + Preview).
+4. Push to `main` (auto-deploys). Vercel detects `/api/quote.ts` as a serverless function.
+5. Verify: open prod site, submit a form, check `move@wemoveondemand.com` and the function logs in Vercel.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Local development
+
+```bash
+npm install
+cp .env.example .env.local   # fill in RESEND_API_KEY
+npx vercel dev               # serves /api/* + Vite together
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+`npm run dev` alone runs Vite without the serverless function — forms will 404 on submit.
+Use `vercel dev` when testing the form end-to-end locally.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### CRM extension point
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The function has a `TODO` hook for forwarding leads to the **upixel.app** CRM (see
+[api/quote.ts](api/quote.ts)). When the webhook URL/token is available, add a `fetch` call
+right before the final `return res.status(200)`.
+
+## Project scripts
+
+| Command            | Purpose                            |
+| ------------------ | ---------------------------------- |
+| `npm run dev`      | Vite dev server (no API)           |
+| `npx vercel dev`   | Full local emulation (API + Vite)  |
+| `npm run build`    | Production build (`tsc -b && vite build`) |
+| `npm run lint`     | ESLint                             |
+| `npm run preview`  | Preview built bundle               |
