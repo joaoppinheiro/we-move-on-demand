@@ -57,7 +57,7 @@ export default function ReviewPage() {
 
                 <div className="space-y-4 text-gray-600 leading-relaxed">
                   <p className="paragraph-large">
-                    Hey there! If we just wrapped up your move here in sunny South Florida, first off —{' '}
+                    Hey there! If we just wrapped up your move here in sunny South Florida, first off ,{' '}
                     <strong className="text-[#0A0A0A]">thank you</strong> for trusting We Move On Demand with your home and your belongings.
                   </p>
 
