@@ -12,8 +12,9 @@ type QuotePayload = {
 };
 
 const TO_EMAIL = process.env.LEAD_TO_EMAIL || 'move@wemoveondemand.com';
-const FROM_EMAIL = process.env.LEAD_FROM_EMAIL || 'leads@wemoveondemand.com';
-const FROM_NAME = 'We Move On Demand Website';
+const FROM_EMAIL = process.env.LEAD_FROM_EMAIL || 'move@wemoveondemand.com';
+const FROM_NAME = 'We Move On Demand';
+const SITE_URL = 'https://wemoveondemand.com';
 
 function escapeHtml(s: string): string {
   return s
@@ -31,6 +32,114 @@ function isValidEmail(email: string): boolean {
 function isValidPhone(phone: string): boolean {
   const digits = phone.replace(/\D/g, '');
   return digits.length >= 7 && digits.length <= 15;
+}
+
+function buildLeadHtml(payload: {
+  name: string;
+  phone: string;
+  email: string;
+  movingDate: string;
+  fromZip: string;
+  toZip: string;
+  source: string;
+  receivedAt: string;
+}): string {
+  return `
+    <div style="font-family:Inter,Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;background:#F3F3F1;">
+      <div style="background:#fff;border-radius:16px;padding:28px;">
+        <h2 style="color:#a02135;margin:0 0 16px;font-size:22px;">New Quote Request</h2>
+        <p style="color:#666;margin:0 0 20px;font-size:13px;">Submitted from <b>${escapeHtml(payload.source)}</b> at ${payload.receivedAt}</p>
+        <table style="width:100%;border-collapse:collapse;font-size:15px;color:#0A0A0A;">
+          <tr><td style="padding:8px 0;color:#888;width:130px;">Name</td><td><b>${escapeHtml(payload.name)}</b></td></tr>
+          <tr><td style="padding:8px 0;color:#888;">Phone</td><td><a href="tel:${escapeHtml(payload.phone)}" style="color:#a02135;text-decoration:none;"><b>${escapeHtml(payload.phone)}</b></a></td></tr>
+          <tr><td style="padding:8px 0;color:#888;">Email</td><td>${payload.email ? `<a href="mailto:${escapeHtml(payload.email)}" style="color:#a02135;text-decoration:none;">${escapeHtml(payload.email)}</a>` : '<span style="color:#bbb;">—</span>'}</td></tr>
+          ${payload.movingDate ? `<tr><td style="padding:8px 0;color:#888;">Moving Date</td><td>${escapeHtml(payload.movingDate)}</td></tr>` : ''}
+          ${payload.fromZip ? `<tr><td style="padding:8px 0;color:#888;">From ZIP</td><td>${escapeHtml(payload.fromZip)}</td></tr>` : ''}
+          ${payload.toZip ? `<tr><td style="padding:8px 0;color:#888;">To ZIP</td><td>${escapeHtml(payload.toZip)}</td></tr>` : ''}
+        </table>
+      </div>
+      <p style="color:#999;font-size:12px;text-align:center;margin-top:16px;">wemoveondemand.com</p>
+    </div>
+  `;
+}
+
+function buildLeadText(payload: {
+  name: string;
+  phone: string;
+  email: string;
+  movingDate: string;
+  fromZip: string;
+  toZip: string;
+  source: string;
+  receivedAt: string;
+}): string {
+  return (
+    `New Quote Request\n` +
+    `Source: ${payload.source}\nReceived: ${payload.receivedAt}\n\n` +
+    `Name:  ${payload.name}\nPhone: ${payload.phone}\nEmail: ${payload.email || '—'}\n` +
+    (payload.movingDate ? `Moving Date: ${payload.movingDate}\n` : '') +
+    (payload.fromZip ? `From ZIP: ${payload.fromZip}\n` : '') +
+    (payload.toZip ? `To ZIP: ${payload.toZip}\n` : '')
+  );
+}
+
+function buildAutoReplyHtml(name: string): string {
+  return `
+    <div style="font-family:Inter,Arial,sans-serif;max-width:600px;margin:0 auto;padding:32px 24px;background:#F3F3F1;">
+      <div style="background:#ffffff;border-radius:24px;padding:40px 32px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+        <img src="${SITE_URL}/images/logo-color.png" alt="We Move On Demand" style="height:48px;width:auto;margin-bottom:28px;" />
+
+        <h2 style="color:#0A0A0A;margin:0 0 16px;font-size:24px;font-weight:700;letter-spacing:-0.02em;">Thank You, ${escapeHtml(name)}!</h2>
+
+        <p style="color:#6b7280;margin:0 0 24px;font-size:16px;line-height:1.6;">
+          We have received your quote request and truly appreciate you considering <strong style="color:#0A0A0A;">We Move On Demand</strong> for your upcoming move here in sunny Florida.
+        </p>
+
+        <div style="background:#F3F3F1;border-radius:16px;padding:24px;margin:24px 0;text-align:left;">
+          <p style="color:#0A0A0A;margin:0 0 12px;font-size:15px;font-weight:600;">What happens next?</p>
+          <ul style="color:#6b7280;margin:0;padding-left:20px;font-size:15px;line-height:1.7;">
+            <li>Our team is reviewing your request right now.</li>
+            <li>We will reach out to you shortly — usually within <strong style="color:#0A0A0A;">a few hours</strong> during business hours.</li>
+            <li>We will discuss your moving details and provide a transparent, no-hidden-fee quote.</li>
+          </ul>
+        </div>
+
+        <p style="color:#6b7280;margin:0 0 24px;font-size:16px;line-height:1.6;">
+          If your move is urgent, feel free to call us directly and mention your quote request.
+        </p>
+
+        <a href="tel:5612127570" style="display:inline-flex;align-items:center;gap:8px;background:#a02135;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:9999px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">
+          Call (561) 212-7570
+        </a>
+
+        <div style="margin-top:32px;padding-top:24px;border-top:1px solid #e5e7eb;">
+          <p style="color:#9ca3af;margin:0 0 4px;font-size:13px;">Licensed & Insured · BBB A+ Rated</p>
+          <p style="color:#9ca3af;margin:0;font-size:12px;">29 NW 13th St Suite 22-1, Boca Raton, FL 33432</p>
+        </div>
+      </div>
+
+      <p style="color:#9ca3af;font-size:12px;text-align:center;margin-top:20px;">
+        This is an automated message from We Move On Demand.<br/>
+        Please do not reply directly to this email.
+      </p>
+    </div>
+  `;
+}
+
+function buildAutoReplyText(name: string): string {
+  return (
+    `Thank You, ${name}!\n\n` +
+    `We have received your quote request and truly appreciate you considering We Move On Demand for your upcoming move here in sunny Florida.\n\n` +
+    `What happens next?\n` +
+    `- Our team is reviewing your request right now.\n` +
+    `- We will reach out to you shortly — usually within a few hours during business hours.\n` +
+    `- We will discuss your moving details and provide a transparent, no-hidden-fee quote.\n\n` +
+    `If your move is urgent, feel free to call us directly at (561) 212-7570 and mention your quote request.\n\n` +
+    `We Move On Demand\n` +
+    `Licensed & Insured · BBB A+ Rated\n` +
+    `29 NW 13th St Suite 22-1, Boca Raton, FL 33432\n\n` +
+    `This is an automated message. Please do not reply directly to this email.`
+  );
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -65,55 +174,55 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Structured log = backup of every lead (visible in Vercel logs/Drain)
   console.log('[lead]', JSON.stringify({ receivedAt, source, name, phone, email, movingDate, fromZip, toZip }));
 
-  const html = `
-    <div style="font-family:Inter,Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;background:#F3F3F1;">
-      <div style="background:#fff;border-radius:16px;padding:28px;">
-        <h2 style="color:#a02135;margin:0 0 16px;font-size:22px;">New Quote Request</h2>
-        <p style="color:#666;margin:0 0 20px;font-size:13px;">Submitted from <b>${escapeHtml(source)}</b> at ${receivedAt}</p>
-        <table style="width:100%;border-collapse:collapse;font-size:15px;color:#0A0A0A;">
-          <tr><td style="padding:8px 0;color:#888;width:130px;">Name</td><td><b>${escapeHtml(name)}</b></td></tr>
-          <tr><td style="padding:8px 0;color:#888;">Phone</td><td><a href="tel:${escapeHtml(phone)}" style="color:#a02135;text-decoration:none;"><b>${escapeHtml(phone)}</b></a></td></tr>
-          <tr><td style="padding:8px 0;color:#888;">Email</td><td>${email ? `<a href="mailto:${escapeHtml(email)}" style="color:#a02135;text-decoration:none;">${escapeHtml(email)}</a>` : '<span style="color:#bbb;">—</span>'}</td></tr>
-          ${movingDate ? `<tr><td style="padding:8px 0;color:#888;">Moving Date</td><td>${escapeHtml(movingDate)}</td></tr>` : ''}
-          ${fromZip ? `<tr><td style="padding:8px 0;color:#888;">From ZIP</td><td>${escapeHtml(fromZip)}</td></tr>` : ''}
-          ${toZip ? `<tr><td style="padding:8px 0;color:#888;">To ZIP</td><td>${escapeHtml(toZip)}</td></tr>` : ''}
-        </table>
-      </div>
-      <p style="color:#999;font-size:12px;text-align:center;margin-top:16px;">wemoveondemand.com</p>
-    </div>
-  `;
+  const resend = new Resend(apiKey);
 
-  const text =
-    `New Quote Request\n` +
-    `Source: ${source}\nReceived: ${receivedAt}\n\n` +
-    `Name:  ${name}\nPhone: ${phone}\nEmail: ${email || '—'}\n` +
-    (movingDate ? `Moving Date: ${movingDate}\n` : '') +
-    (fromZip ? `From ZIP: ${fromZip}\n` : '') +
-    (toZip ? `To ZIP: ${toZip}\n` : '');
+  // 1. Send lead notification to owner
+  const leadHtml = buildLeadHtml({ receivedAt, source, name, phone, email, movingDate, fromZip, toZip });
+  const leadText = buildLeadText({ receivedAt, source, name, phone, email, movingDate, fromZip, toZip });
 
   try {
-    const resend = new Resend(apiKey);
-    const { error } = await resend.emails.send({
+    const { error: leadError } = await resend.emails.send({
       from: `${FROM_NAME} <${FROM_EMAIL}>`,
       to: [TO_EMAIL],
       replyTo: email || undefined,
       subject: `New Lead — ${name} (${phone})`,
-      html,
-      text,
+      html: leadHtml,
+      text: leadText,
     });
 
-    if (error) {
-      console.error('[quote] Resend error', error);
-      return res.status(502).json({ ok: false, error: 'Failed to send email' });
+    if (leadError) {
+      console.error('[quote] Lead email error', leadError);
+      return res.status(502).json({ ok: false, error: 'Failed to send lead notification' });
     }
-
-    // TODO: forward to upixel.app CRM webhook when credentials provided.
-
-    return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('[quote] Unexpected error', err);
+    console.error('[quote] Lead email unexpected error', err);
     return res.status(500).json({ ok: false, error: 'Unexpected server error' });
   }
+
+  // 2. Send auto-reply confirmation to customer (if email provided)
+  if (email) {
+    try {
+      const { error: replyError } = await resend.emails.send({
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: [email],
+        subject: 'We Received Your Quote Request — We Move On Demand',
+        html: buildAutoReplyHtml(name),
+        text: buildAutoReplyText(name),
+      });
+
+      if (replyError) {
+        console.error('[quote] Auto-reply error', replyError);
+        // Don't fail the request if auto-reply fails; lead was already saved
+      }
+    } catch (err) {
+      console.error('[quote] Auto-reply unexpected error', err);
+      // Don't fail the request if auto-reply fails
+    }
+  }
+
+  // TODO: forward to upixel.app CRM webhook when credentials provided.
+
+  return res.status(200).json({ ok: true });
 }
 
 function safeParse(s: string): QuotePayload | null {
