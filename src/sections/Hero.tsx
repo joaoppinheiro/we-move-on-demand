@@ -11,7 +11,7 @@ function HeroQuickForm({ variant, onSuccess }: { variant: 'desktop' | 'mobile'; 
   const dark = variant === 'desktop';
   const inputCls = dark
     ? 'bg-white/10 border border-white/20 rounded-full px-5 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:border-white/40 transition-colors disabled:opacity-60'
-    : 'bg-gray-100 border border-gray-200 rounded-full px-5 py-3 text-sm text-[#0A0A0A] placeholder:text-gray-400 focus:outline-none focus:border-[#a02135] transition-colors disabled:opacity-60';
+    : 'bg-gray-100 border border-gray-200 rounded-full px-5 py-3 text-sm text-[#0A0A0A] placeholder:text-gray-500 focus:outline-none focus:border-[#a02135] transition-colors disabled:opacity-60';
   const btnCls = dark
     ? 'inline-flex items-center justify-center gap-2 bg-white text-[#a02135] text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-white/90 hover:scale-105 transition-all shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100'
     : 'inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] hover:scale-105 transition-all shadow-lg whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100';

@@ -24,7 +24,7 @@ export function FreeEstimate() {
   };
 
   const inputCls =
-    'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[#0A0A0A] placeholder:text-gray-400 focus:outline-none focus:border-[#a02135] focus:ring-2 focus:ring-[#a02135]/10 transition-all disabled:opacity-60';
+    'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[#0A0A0A] placeholder:text-gray-500 focus:outline-none focus:border-[#a02135] focus:ring-2 focus:ring-[#a02135]/10 transition-all disabled:opacity-60';
 
   return (
     <section id="contact" className="relative py-16 lg:py-24 bg-white overflow-hidden">
@@ -147,7 +147,7 @@ export function FreeEstimate() {
                 )}
               </button>
 
-              <p className="text-[10px] text-gray-400 text-center pt-1">
+              <p className="text-[10px] text-gray-500 text-center pt-1">
                 No Hidden Fees. Honest Pricing. Every Time.
               </p>
             </form>
