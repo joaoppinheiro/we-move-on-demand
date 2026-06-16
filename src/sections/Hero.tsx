@@ -158,7 +158,7 @@ export function Hero() {
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                 aria-label="View our BBB Accredited A+ profile"
               >
-                <img src="/images/bbb-logo.png" alt="BBB A+ Rated" className="h-10 w-auto" />
+                <img src="/images/bbb-logo.webp" alt="BBB A+ Rated" className="h-10 w-auto" loading="lazy" decoding="async" />
               </a>
             </div>
           </div>
@@ -169,9 +169,13 @@ export function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#a02135]/10 to-[#242550]/10 rounded-full blur-3xl scale-75" />
 
               <img
-                src="/images/eduardo-hero.png"
+                src="/images/eduardo-hero.webp"
                 alt="Eduardo - Owner of We Move On Demand"
                 className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto drop-shadow-2xl"
+                fetchPriority="high"
+                decoding="async"
+                width="576"
+                height="720"
               />
 
               <div className="absolute bottom-16 right-0 z-20">

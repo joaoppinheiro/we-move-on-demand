@@ -150,9 +150,13 @@ export function FreeEstimate() {
           {/* Eduardo Image Column — full PNG on white, contained, anchored bottom-center */}
           <div className="hidden lg:flex items-end justify-center">
             <img
-              src="/images/eduardo-3.png"
+              src="/images/eduardo-3.webp"
               alt="Eduardo - We Move On Demand"
               className="w-full h-full max-h-full object-contain object-bottom"
+              loading="lazy"
+              decoding="async"
+              width="500"
+              height="625"
             />
           </div>
         </div>

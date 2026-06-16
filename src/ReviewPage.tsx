@@ -10,7 +10,7 @@ export default function ReviewPage() {
       <header className="w-full bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <img src="/images/logo-color.png" alt="We Move On Demand" className="h-10 w-auto" />
+            <img src="/images/logo-color.webp" alt="We Move On Demand" className="h-10 w-auto" />
           </a>
           <a
             href={PHONE_TEL}
@@ -32,14 +32,14 @@ export default function ReviewPage() {
               <div className="relative order-2 lg:order-1">
                 <div className="relative aspect-[4/5] max-w-sm mx-auto lg:max-w-none rounded-3xl overflow-hidden bg-white shadow-xl">
                   <img
-                    src="/images/eduardo-2.png"
+                    src="/images/eduardo-2.webp"
                     alt="Eduardo — Owner of We Move On Demand"
                     className="absolute inset-0 w-full h-full object-cover object-top"
                   />
                 </div>
                 {/* Floating badge */}
                 <div className="absolute -bottom-4 -right-2 lg:bottom-8 lg:-right-6 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 flex items-center gap-3">
-                  <img src="/images/bbb-logo.png" alt="BBB A+ Rated" className="h-10 w-auto" />
+                  <img src="/images/bbb-logo.webp" alt="BBB A+ Rated" className="h-10 w-auto" />
                   <div className="leading-tight">
                     <p className="text-[10px] font-bold uppercase tracking-widest text-[#a02135]">A+ Rated</p>
                     <p className="text-[10px] text-gray-500">BBB Accredited</p>
@@ -132,7 +132,7 @@ export default function ReviewPage() {
                 className="group relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 flex flex-col items-center text-center"
               >
                 <div className="w-16 h-16 rounded-2xl bg-[#F3F3F1] flex items-center justify-center mb-6 group-hover:bg-[#a02135]/10 transition-colors">
-                  <img src="/images/bbb-logo.png" alt="BBB" className="w-10 h-auto" />
+                  <img src="/images/bbb-logo.webp" alt="BBB" className="w-10 h-auto" />
                 </div>
                 <h3 className="text-xl font-bold text-[#0A0A0A] mb-2">BBB Review</h3>
                 <p className="text-sm text-gray-500 mb-6 leading-relaxed">
@@ -172,7 +172,7 @@ export default function ReviewPage() {
       <footer className="bg-white border-t border-gray-100 py-8">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <img src="/images/logo-color.png" alt="We Move On Demand" className="h-8 w-auto opacity-80" />
+            <img src="/images/logo-color.webp" alt="We Move On Demand" className="h-8 w-auto opacity-80" />
             <span className="text-xs text-gray-400 uppercase tracking-wider">© {new Date().getFullYear()} We Move On Demand</span>
           </div>
           <div className="flex items-center gap-6">

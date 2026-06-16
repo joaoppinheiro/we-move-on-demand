@@ -27,9 +27,13 @@ export function About() {
           <div className="lg:col-span-5 relative">
             <div className="relative aspect-[4/5] max-w-sm mx-auto lg:max-w-none rounded-3xl overflow-hidden bg-white shadow-lg">
               <img
-                src="/images/eduardo-2.png"
+                src="/images/eduardo-2.webp"
                 alt="Eduardo - Owner of We Move On Demand"
                 className="absolute inset-0 w-full h-full object-cover object-top"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="500"
               />
             </div>
 
@@ -41,7 +45,7 @@ export function About() {
               className="absolute -bottom-4 -right-4 lg:bottom-6 lg:-right-6 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 flex items-center gap-3 hover:scale-105 transition-transform"
               aria-label="View our BBB Accredited A+ profile"
             >
-              <img src="/images/bbb-logo.png" alt="BBB A+" className="h-10 w-auto" />
+              <img src="/images/bbb-logo.webp" alt="BBB A+" className="h-10 w-auto" loading="lazy" decoding="async" />
               <div className="leading-tight">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#a02135]">A+ Rated</p>
                 <p className="text-[10px] text-gray-500">Since 2009</p>
