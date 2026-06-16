@@ -38,6 +38,7 @@ function HeroQuickForm({ variant, onSuccess }: { variant: 'desktop' | 'mobile'; 
         value={fields.name}
         onChange={(e) => setFields({ ...fields, name: e.target.value })}
         placeholder="Your name"
+        aria-label="Your name"
         disabled={isLoading}
         className={inputCls}
       />
@@ -47,6 +48,7 @@ function HeroQuickForm({ variant, onSuccess }: { variant: 'desktop' | 'mobile'; 
         value={fields.phone}
         onChange={(e) => setFields({ ...fields, phone: e.target.value })}
         placeholder="Your phone"
+        aria-label="Your phone number"
         disabled={isLoading}
         className={inputCls}
       />
@@ -55,6 +57,7 @@ function HeroQuickForm({ variant, onSuccess }: { variant: 'desktop' | 'mobile'; 
         value={fields.email}
         onChange={(e) => setFields({ ...fields, email: e.target.value })}
         placeholder="Your email"
+        aria-label="Your email address"
         disabled={isLoading}
         className={inputCls}
       />

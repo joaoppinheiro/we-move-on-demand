@@ -102,15 +102,17 @@ export function Testimonials() {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={prevTestimonial}
+                    aria-label="Previous testimonial"
                     className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-[#a02135] hover:text-white hover:border-[#a02135] transition-all"
                   >
-                    <ChevronLeft className="w-5 h-5 text-[#0A0A0A]" />
+                    <ChevronLeft className="w-5 h-5 text-[#0A0A0A]" aria-hidden="true" />
                   </button>
                   <button
                     onClick={nextTestimonial}
+                    aria-label="Next testimonial"
                     className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-[#a02135] hover:text-white hover:border-[#a02135] transition-all"
                   >
-                    <ChevronRight className="w-5 h-5 text-[#0A0A0A]" />
+                    <ChevronRight className="w-5 h-5 text-[#0A0A0A]" aria-hidden="true" />
                   </button>
                 </div>
               </div>
@@ -118,10 +120,12 @@ export function Testimonials() {
 
             {/* Dots Indicator */}
             <div className="flex justify-center gap-2 mt-8">
-              {testimonials.map((_, index) => (
+              {testimonials.map((t, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveIndex(index)}
+                  aria-label={`View testimonial from ${t.name}`}
+                  aria-current={index === activeIndex ? 'true' : undefined}
                   className={`h-2 rounded-full transition-all ${
                     index === activeIndex
                       ? 'bg-[#a02135] w-8'

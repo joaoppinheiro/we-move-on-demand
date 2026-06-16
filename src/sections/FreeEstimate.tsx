@@ -64,6 +64,7 @@ export function FreeEstimate() {
                 value={fields.name}
                 onChange={(e) => setFields({ ...fields, name: e.target.value })}
                 placeholder="Full name *"
+                aria-label="Full name"
                 disabled={isLoading}
                 className={inputCls}
               />
@@ -73,6 +74,7 @@ export function FreeEstimate() {
                 value={fields.phone}
                 onChange={(e) => setFields({ ...fields, phone: e.target.value })}
                 placeholder="Phone *"
+                aria-label="Phone number"
                 disabled={isLoading}
                 className={inputCls}
               />
@@ -81,6 +83,7 @@ export function FreeEstimate() {
                 value={fields.email}
                 onChange={(e) => setFields({ ...fields, email: e.target.value })}
                 placeholder="Email"
+                aria-label="Email address"
                 disabled={isLoading}
                 className={inputCls}
               />
@@ -93,6 +96,7 @@ export function FreeEstimate() {
                   value={fields.fromZip}
                   onChange={(e) => setFields({ ...fields, fromZip: e.target.value })}
                   placeholder="From ZIP"
+                  aria-label="Moving from ZIP code"
                   disabled={isLoading}
                   className={inputCls}
                 />
@@ -103,6 +107,7 @@ export function FreeEstimate() {
                   value={fields.toZip}
                   onChange={(e) => setFields({ ...fields, toZip: e.target.value })}
                   placeholder="To ZIP"
+                  aria-label="Moving to ZIP code"
                   disabled={isLoading}
                   className={inputCls}
                 />
@@ -112,6 +117,7 @@ export function FreeEstimate() {
                 type="date"
                 value={fields.movingDate}
                 onChange={(e) => setFields({ ...fields, movingDate: e.target.value })}
+                aria-label="Preferred moving date"
                 disabled={isLoading}
                 className={`${inputCls} text-gray-500`}
               />
