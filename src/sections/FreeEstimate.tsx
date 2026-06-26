@@ -6,6 +6,7 @@ import { PHONE_TEL, PHONE_LABEL, LEAD_EMAIL } from '@/lib/constants';
 
 export function FreeEstimate() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [smsConsent, setSmsConsent] = useState(false);
   const [fields, setFields] = useState({
     name: '',
     phone: '',
@@ -18,7 +19,7 @@ export function FreeEstimate() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fields.name || !fields.phone) return;
+    if (!fields.name || !fields.phone || !smsConsent) return;
     const ok = await submit(fields);
     if (ok) setIsSubmitted(true);
   };
@@ -78,6 +79,20 @@ export function FreeEstimate() {
                 disabled={isLoading}
                 className={inputCls}
               />
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  required
+                  checked={smsConsent}
+                  onChange={(e) => setSmsConsent(e.target.checked)}
+                  disabled={isLoading}
+                  className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-gray-300 accent-[#a02135] cursor-pointer disabled:opacity-60"
+                />
+                <span className="text-[11px] text-gray-600 leading-relaxed">
+                  I agree to receive SMS text messages from We Move On Demand, including service updates and a post-move review request. Message and data rates may apply. Reply STOP to opt out.
+                </span>
+              </label>
+
               <input
                 type="email"
                 value={fields.email}
@@ -132,7 +147,7 @@ export function FreeEstimate() {
               <button
                 type="submit"
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-bold uppercase tracking-widest px-6 py-3.5 rounded-full hover:bg-[#c41e46] hover:scale-[1.02] transition-all shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
-                disabled={isLoading || !fields.name || !fields.phone}
+                disabled={isLoading || !fields.name || !fields.phone || !smsConsent}
               >
                 {isLoading ? (
                   <>
@@ -216,6 +231,7 @@ export function FreeEstimate() {
         setIsSubmitted(open);
         if (!open) {
           reset();
+          setSmsConsent(false);
           setFields({ name: '', phone: '', email: '', movingDate: '', fromZip: '', toZip: '' });
         }
       }}>
