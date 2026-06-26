@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
     { "source": "/terms-and-conditions", "destination": "/terms-and-conditions.html" },
+    { "source": "/sms-consent-script", "destination": "/sms-consent-script.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
