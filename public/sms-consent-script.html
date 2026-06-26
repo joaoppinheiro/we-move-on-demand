@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMS Consent Script | We Move On Demand</title>
+    <meta name="description" content="SMS consent script used by We Move On Demand staff during the booking call to obtain verbal customer consent." />
+    <link rel="canonical" href="https://wemoveondemand.com/sms-consent-script" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" /></noscript>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #F3F3F1;
+        color: #0A0A0A;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── Header ── */
+      header {
+        background: #0A0A0A;
+        padding: 16px 24px;
+      }
+      header .inner {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      header img { height: 40px; width: auto; }
+      header a.back {
+        color: #9ca3af;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+      header a.back:hover { color: #a02135; }
+
+      /* ── Hero band ── */
+      .hero-band {
+        background: #151735;
+        color: #fff;
+        padding: 56px 24px 48px;
+        text-align: center;
+      }
+      .hero-band h1 {
+        font-size: clamp(28px, 5vw, 42px);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 12px;
+      }
+      .hero-band p {
+        color: #9ca3af;
+        font-size: 15px;
+      }
+      .hero-band span.tag {
+        display: inline-block;
+        background: #a02135;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 4px 12px;
+        border-radius: 999px;
+        margin-bottom: 16px;
+      }
+
+      /* ── Content ── */
+      main {
+        flex: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 48px 24px 64px;
+        width: 100%;
+      }
+
+      section.card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 36px 40px;
+        margin-bottom: 24px;
+        border: 1px solid #e5e7eb;
+      }
+      @media (max-width: 600px) {
+        section.card { padding: 24px 20px; }
+      }
+
+      section.card h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #151735;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #F3F3F1;
+        letter-spacing: -0.01em;
+      }
+
+      p { line-height: 1.7; color: #374151; margin-bottom: 12px; font-size: 15px; }
+      p:last-child { margin-bottom: 0; }
+
+      .script-block {
+        background: #F3F3F1;
+        border-left: 4px solid #a02135;
+        border-radius: 0 8px 8px 0;
+        padding: 24px 28px;
+        margin: 20px 0;
+      }
+      .script-block p {
+        color: #0A0A0A;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.8;
+        margin: 0;
+      }
+
+      .note-box {
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+        border-radius: 8px;
+        padding: 16px 20px;
+        margin-top: 16px;
+      }
+      .note-box p {
+        color: #92400e;
+        font-size: 14px;
+        margin: 0;
+      }
+      .note-box strong { color: #7c2d12; }
+
+      a { color: #a02135; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      /* ── Footer ── */
+      footer {
+        background: #0A0A0A;
+        color: #6b7280;
+        text-align: center;
+        padding: 24px;
+        font-size: 13px;
+      }
+      footer a { color: #9ca3af; }
+      footer a:hover { color: #a02135; }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <div class="inner">
+        <a href="/">
+          <img src="/images/logo-white.webp" alt="We Move On Demand" />
+        </a>
+        <a href="/" class="back">← Back to Home</a>
+      </div>
+    </header>
+
+    <div class="hero-band">
+      <span class="tag">Internal Reference</span>
+      <h1>SMS Consent Script</h1>
+      <p>We Move On Demand, LLC &nbsp;|&nbsp; For staff use during booking calls</p>
+    </div>
+
+    <main>
+
+      <section class="card">
+        <h2>About This Script</h2>
+        <p>
+          The following script is read by our team to obtain verbal SMS consent from customers during the booking call. Consent must be obtained before any post-move text messages are sent.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Verbal Consent Script</h2>
+        <p>Read the following to the customer verbatim before ending the booking call:</p>
+
+        <div class="script-block">
+          <p>
+            "After your move is completed, we will send you a text message asking for a Google review. Message frequency is approximately 1–2 messages per completed move. Message and data rates may apply. You can reply STOP at any time to opt out, or HELP for assistance. Do you agree to receive this text message?"
+          </p>
+        </div>
+
+        <div class="note-box">
+          <p><strong>Important:</strong> Customer consent must be recorded in the company CRM immediately after the call. Log the customer's name, phone number, date and time of consent, and the staff member who obtained it. Do not send any SMS messages unless consent is confirmed and logged.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Related Policies</h2>
+        <p>
+          Our SMS practices are governed by our full privacy policy and terms of service. Customers can review these documents at any time:
+        </p>
+        <p>
+          <a href="/privacy-policy">Privacy Policy</a> &nbsp;&mdash;&nbsp;
+          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+        </p>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>© 2025 We Move On Demand, LLC. All rights reserved. &nbsp;|&nbsp;
+        <a href="/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp;
+        <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+      </p>
+    </footer>
+
+  </body>
+</html>
