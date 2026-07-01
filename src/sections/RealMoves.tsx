@@ -64,7 +64,7 @@ function Placeholder({
 
 export function RealMoves() {
   return (
-    <section id="real-moves" className="relative py-20 lg:py-28 bg-white overflow-hidden">
+    <section id="real-moves" className="hidden relative py-20 lg:py-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
