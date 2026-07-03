@@ -1,91 +1,14 @@
 import { useState } from 'react';
-import { ArrowRight, Phone, Star, Award, MapPin, AlertCircle, Loader2 } from 'lucide-react';
+import { ArrowRight, Phone, Star, Award, MapPin } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useQuoteSubmit } from '@/hooks/useQuoteSubmit';
 import { BBB_PROFILE_URL, PHONE_TEL } from '@/lib/constants';
-
-function HeroQuickForm({ variant, onSuccess }: { variant: 'desktop' | 'mobile'; onSuccess: () => void }) {
-  const [fields, setFields] = useState({ name: '', phone: '', email: '' });
-  const { submit, isLoading, state, errorMessage } = useQuoteSubmit(`hero-${variant}`);
-
-  const dark = variant === 'desktop';
-  const inputCls = dark
-    ? 'bg-white/10 border border-white/20 rounded-full px-5 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:border-white/40 transition-colors disabled:opacity-60'
-    : 'bg-gray-100 border border-gray-200 rounded-full px-5 py-3 text-sm text-[#0A0A0A] placeholder:text-gray-500 focus:outline-none focus:border-[#a02135] transition-colors disabled:opacity-60';
-  const btnCls = dark
-    ? 'inline-flex items-center justify-center gap-2 bg-white text-[#a02135] text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-white/90 hover:scale-105 transition-all shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100'
-    : 'inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] hover:scale-105 transition-all shadow-lg whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100';
-
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!fields.name || !fields.phone) return;
-    const ok = await submit(fields);
-    if (ok) {
-      onSuccess();
-      setFields({ name: '', phone: '', email: '' });
-    }
-  };
-
-  const gridCls = variant === 'desktop'
-    ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'
-    : 'grid grid-cols-1 gap-3';
-
-  return (
-    <form className={gridCls} onSubmit={onSubmit}>
-      <input
-        type="text"
-        required
-        value={fields.name}
-        onChange={(e) => setFields({ ...fields, name: e.target.value })}
-        placeholder="Your name"
-        aria-label="Your name"
-        disabled={isLoading}
-        className={inputCls}
-      />
-      <input
-        type="tel"
-        required
-        value={fields.phone}
-        onChange={(e) => setFields({ ...fields, phone: e.target.value })}
-        placeholder="Your phone"
-        aria-label="Your phone number"
-        disabled={isLoading}
-        className={inputCls}
-      />
-      <input
-        type="email"
-        value={fields.email}
-        onChange={(e) => setFields({ ...fields, email: e.target.value })}
-        placeholder="Your email"
-        aria-label="Your email address"
-        disabled={isLoading}
-        className={inputCls}
-      />
-      <button type="submit" className={btnCls} disabled={isLoading || !fields.name || !fields.phone}>
-        {isLoading ? (
-          <>
-            <Loader2 className="w-4 h-4 flex-shrink-0 animate-spin" />
-            Sending...
-          </>
-        ) : (
-          <>
-            Get Estimate
-            <ArrowRight className="w-4 h-4 flex-shrink-0" />
-          </>
-        )}
-      </button>
-      {state === 'error' && (
-        <div className={`sm:col-span-2 lg:col-span-4 flex items-start gap-2 px-4 py-2 rounded-full text-xs ${dark ? 'bg-white/10 text-white' : 'bg-red-50 text-red-700 border border-red-200'}`}>
-          <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-          <span>{errorMessage}</span>
-        </div>
-      )}
-    </form>
-  );
-}
 
 export function Hero() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section id="hero" className="relative min-h-screen bg-[#F3F3F1] overflow-hidden">
@@ -205,7 +128,14 @@ export function Hero() {
               </div>
             </div>
             <div className="lg:col-span-3">
-              <HeroQuickForm variant="desktop" onSuccess={() => setIsQuoteOpen(true)} />
+              <button
+                type="button"
+                onClick={scrollToContact}
+                className="inline-flex items-center justify-center gap-2 bg-white text-[#a02135] text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-white/90 hover:scale-105 transition-all shadow-lg"
+              >
+                Get My Free Estimate
+                <ArrowRight className="w-4 h-4 flex-shrink-0" />
+              </button>
             </div>
           </div>
         </div>
@@ -223,7 +153,14 @@ export function Hero() {
               <p className="text-xs text-gray-500">Get your quote in minutes</p>
             </div>
           </div>
-          <HeroQuickForm variant="mobile" onSuccess={() => setIsQuoteOpen(true)} />
+          <button
+            type="button"
+            onClick={scrollToContact}
+            className="w-full inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c41e46] hover:scale-105 transition-all shadow-lg"
+          >
+            Get My Free Estimate
+            <ArrowRight className="w-4 h-4 flex-shrink-0" />
+          </button>
         </div>
       </div>
 
