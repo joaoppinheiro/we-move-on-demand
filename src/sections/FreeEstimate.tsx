@@ -163,7 +163,7 @@ export function FreeEstimate() {
                     className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-gray-300 accent-[#a02135] cursor-pointer disabled:opacity-60"
                   />
                   <span className="text-[11px] text-gray-600 leading-relaxed">
-                    I agree to receive SMS text messages from We Move On Demand, including service updates and a post-move review request. Message and data rates may apply. Reply STOP to opt out.
+                    I agree to receive SMS text messages from We Move On Demand, including service updates and a post-move review request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out. View our Privacy Policy at wemoveondemand.com/privacy-policy
                   </span>
                 </label>
               </div>
