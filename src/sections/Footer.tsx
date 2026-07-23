@@ -130,7 +130,7 @@ export function Footer() {
               </a>
               <div className="flex items-start gap-3 text-gray-400">
                 <MapPin className="w-5 h-5 mt-0.5" />
-                <span>29 NW 13th St Suite 22 1<br />Boca Raton, FL 33432</span>
+                <span>129 NW 13th Street, Suite 22<br />Boca Raton, FL 33432</span>
               </div>
               
               <a

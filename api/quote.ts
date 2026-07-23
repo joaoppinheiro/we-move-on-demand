@@ -114,7 +114,7 @@ function buildAutoReplyHtml(name: string): string {
 
         <div style="margin-top:32px;padding-top:24px;border-top:1px solid #e5e7eb;">
           <p style="color:#9ca3af;margin:0 0 4px;font-size:13px;">Licensed & Insured · BBB A+ Rated</p>
-          <p style="color:#9ca3af;margin:0;font-size:12px;">29 NW 13th St Suite 22-1, Boca Raton, FL 33432</p>
+          <p style="color:#9ca3af;margin:0;font-size:12px;">129 NW 13th Street, Suite 22, Boca Raton, FL 33432</p>
         </div>
       </div>
 
@@ -137,7 +137,7 @@ function buildAutoReplyText(name: string): string {
     `If your move is urgent, feel free to call us directly at (561) 212-7570 and mention your quote request.\n\n` +
     `We Move On Demand\n` +
     `Licensed & Insured · BBB A+ Rated\n` +
-    `29 NW 13th St Suite 22-1, Boca Raton, FL 33432\n\n` +
+    `129 NW 13th Street, Suite 22, Boca Raton, FL 33432\n\n` +
     `This is an automated message. Please do not reply directly to this email.`
   );
 }

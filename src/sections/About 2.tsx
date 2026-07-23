@@ -79,7 +79,7 @@ export function About() {
               <img src="/images/bbb-logo.png" alt="BBB A+ Rated Business" className="hidden sm:block h-10 w-auto flex-shrink-0" />
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <MapPin className="w-4 h-4 text-[#a02135] flex-shrink-0" />
-                29 NW 13th St Suite 22 1, Boca Raton, FL 33432
+                129 NW 13th Street, Suite 22, Boca Raton, FL 33432
               </div>
             </div>
 

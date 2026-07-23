@@ -96,7 +96,7 @@ export function About() {
             {/* Address */}
             <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
               <MapPin className="w-4 h-4 text-[#a02135] flex-shrink-0" />
-              29 NW 13th St Suite 22-1, Boca Raton, FL 33432
+              129 NW 13th Street, Suite 22, Boca Raton, FL 33432
             </div>
 
             {/* CTAs */}
