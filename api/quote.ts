@@ -51,7 +51,7 @@ function buildLeadHtml(payload: {
         <p style="color:#666;margin:0 0 20px;font-size:13px;">Submitted from <b>${escapeHtml(payload.source)}</b> at ${payload.receivedAt}</p>
         <table style="width:100%;border-collapse:collapse;font-size:15px;color:#0A0A0A;">
           <tr><td style="padding:8px 0;color:#888;width:130px;">Name</td><td><b>${escapeHtml(payload.name)}</b></td></tr>
-          <tr><td style="padding:8px 0;color:#888;">Phone</td><td><a href="tel:${escapeHtml(payload.phone)}" style="color:#a02135;text-decoration:none;"><b>${escapeHtml(payload.phone)}</b></a></td></tr>
+          <tr><td style="padding:8px 0;color:#888;">Phone</td><td><b>${escapeHtml(payload.phone)}</b></td></tr>
           <tr><td style="padding:8px 0;color:#888;">Email</td><td>${payload.email ? `<a href="mailto:${escapeHtml(payload.email)}" style="color:#a02135;text-decoration:none;">${escapeHtml(payload.email)}</a>` : '<span style="color:#bbb;">—</span>'}</td></tr>
           ${payload.movingDate ? `<tr><td style="padding:8px 0;color:#888;">Moving Date</td><td>${escapeHtml(payload.movingDate)}</td></tr>` : ''}
           ${payload.fromZip ? `<tr><td style="padding:8px 0;color:#888;">From ZIP</td><td>${escapeHtml(payload.fromZip)}</td></tr>` : ''}
