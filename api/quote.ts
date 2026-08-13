@@ -184,6 +184,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const { error: leadError } = await resend.emails.send({
       from: `${FROM_NAME} <${FROM_EMAIL}>`,
       to: [TO_EMAIL],
+      cc: ['laila@wemoveondemand.com'],
       replyTo: email || undefined,
       subject: `New Lead — ${name} (${phone})`,
       html: leadHtml,
