@@ -99,9 +99,10 @@ export function Hero() {
                 alt="Eduardo - Owner of We Move On Demand"
                 className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto drop-shadow-2xl"
                 fetchPriority="high"
+                loading="eager"
                 decoding="async"
                 width="576"
-                height="720"
+                height="821"
               />
 
               <div className="absolute bottom-16 right-0 z-20">
