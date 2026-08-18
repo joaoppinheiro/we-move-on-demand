@@ -1,7 +1,8 @@
-import { Star, ExternalLink, MessageSquareHeart, MapPin, Phone } from 'lucide-react';
+import { Star, ExternalLink, MessageSquareHeart, MapPin, Phone, Facebook, ThumbsUp } from 'lucide-react';
 import { BBB_LEAVE_REVIEW_URL, PHONE_TEL, PHONE_LABEL } from '@/lib/constants';
 
 const GOOGLE_REVIEW_URL = 'https://g.page/r/CV2LbXgNR2dvEBE/review';
+const FACEBOOK_REVIEW_URL = 'https://www.facebook.com/wemoveondemandfl/reviews';
 
 export default function ReviewPage() {
   return (
@@ -97,7 +98,7 @@ export default function ReviewPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Google Review Card */}
               <a
                 href={GOOGLE_REVIEW_URL}
@@ -120,6 +121,27 @@ export default function ReviewPage() {
                 <span className="mt-auto inline-flex items-center gap-2 bg-[#a02135] text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full group-hover:bg-[#c41e46] transition-colors">
                   <Star className="w-4 h-4" />
                   Leave a Google Review
+                  <ExternalLink className="w-3 h-3 opacity-70" />
+                </span>
+              </a>
+
+              {/* Facebook Review Card */}
+              <a
+                href={FACEBOOK_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 flex flex-col items-center text-center"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-[#F3F3F1] flex items-center justify-center mb-6 group-hover:bg-[#a02135]/10 transition-colors">
+                  <Facebook className="w-8 h-8 text-[#1877F2]" />
+                </div>
+                <h3 className="text-xl font-bold text-[#0A0A0A] mb-2">Facebook Review</h3>
+                <p className="text-sm text-gray-500 mb-6 leading-relaxed">
+                  Share your experience on Facebook and help our community find a trusted moving crew.
+                </p>
+                <span className="mt-auto inline-flex items-center gap-2 bg-[#1877F2] text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full group-hover:bg-[#166FE5] transition-colors">
+                  <ThumbsUp className="w-4 h-4" />
+                  Review Us on Facebook
                   <ExternalLink className="w-3 h-3 opacity-70" />
                 </span>
               </a>
