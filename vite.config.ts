@@ -21,7 +21,7 @@ export default defineConfig({
       },
       output: {
         manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
+          'vendor-react': ['react', 'react-dom', 'react-dom/client'],
           'vendor-radix': [
             '@radix-ui/react-accordion',
             '@radix-ui/react-dialog',
@@ -31,7 +31,6 @@ export default defineConfig({
             '@radix-ui/react-slot',
             '@radix-ui/react-tooltip',
           ],
-          'vendor-form': ['react-hook-form', '@hookform/resolvers', 'zod'],
           'vendor-ui': ['lucide-react', 'class-variance-authority', 'clsx', 'tailwind-merge', 'sonner'],
         },
       },
