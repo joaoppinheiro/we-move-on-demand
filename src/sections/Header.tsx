@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
+import { MOVING_BOXES_URL } from '@/lib/constants';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,6 +20,7 @@ export function Header() {
     { label: 'About', href: '#about' },
     { label: 'Testimonials', href: '#testimonials' },
     { label: 'Contact', href: '#contact' },
+    { label: 'Order Boxes', href: MOVING_BOXES_URL },
     { label: 'Review', href: '/review.html' },
   ];
 

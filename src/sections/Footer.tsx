@@ -1,25 +1,43 @@
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
-import { BBB_PROFILE_URL } from '@/lib/constants';
+import { BBB_PROFILE_URL, MOVING_BOXES_URL } from '@/lib/constants';
 
-const quickLinks = [
+type FooterLink = {
+  label: string;
+  href: string;
+  /** Absolute paths (real routes) are never prefixed with hashPrefix. */
+  absolute?: boolean;
+};
+
+const quickLinks: FooterLink[] = [
   { label: 'Home', href: '#hero' },
   { label: 'Services', href: '#services' },
   { label: 'About Us', href: '#about' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Order Moving Boxes', href: MOVING_BOXES_URL, absolute: true },
 ];
 
-const services = [
+const services: FooterLink[] = [
   { label: 'Residential Moving', href: '#services' },
   { label: 'Commercial Moving', href: '#services' },
   { label: 'Local Moving', href: '#services' },
   { label: 'Long Distance', href: '#services' },
   { label: 'Storage Services', href: '#services' },
   { label: 'Packing Services', href: '#services' },
+  { label: 'Moving Boxes & Supplies', href: MOVING_BOXES_URL, absolute: true },
 ];
 
-export function Footer() {
+type FooterProps = {
+  /**
+   * Prefix for same-page hash links. Pass "/" when the footer is rendered on a
+   * page other than the home page (e.g. /moving-boxes) so "#services" resolves
+   * to "/#services" instead of an anchor that doesn't exist there.
+   */
+  hashPrefix?: string;
+};
+
+export function Footer({ hashPrefix = '' }: FooterProps) {
   return (
     <footer className="relative pt-24 pb-8 bg-[#0A0A0A] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -79,7 +97,7 @@ export function Footer() {
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <a
-                    href={link.href}
+                    href={link.absolute ? link.href : `${hashPrefix}${link.href}`}
                     className="text-gray-400 hover:text-[#a02135] transition-colors"
                   >
                     {link.label}
@@ -98,7 +116,7 @@ export function Footer() {
               {services.map((service) => (
                 <li key={service.label}>
                   <a
-                    href={service.href}
+                    href={service.absolute ? service.href : `${hashPrefix}${service.href}`}
                     className="text-gray-400 hover:text-[#a02135] transition-colors"
                   >
                     {service.label}

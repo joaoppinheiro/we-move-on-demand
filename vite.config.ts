@@ -18,6 +18,7 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         review: path.resolve(__dirname, 'review.html'),
+        'moving-boxes': path.resolve(__dirname, 'moving-boxes.html'),
       },
       output: {
         manualChunks: {

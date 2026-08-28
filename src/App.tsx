@@ -6,6 +6,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import './App.css';
 
 const Services = lazy(() => import('./sections/Services').then(m => ({ default: m.Services })));
+const OrderBoxes = lazy(() => import('./sections/OrderBoxes').then(m => ({ default: m.OrderBoxes })));
 const About = lazy(() => import('./sections/About').then(m => ({ default: m.About })));
 const Testimonials = lazy(() => import('./sections/Testimonials').then(m => ({ default: m.Testimonials })));
 const RealMoves = lazy(() => import('./sections/RealMoves').then(m => ({ default: m.RealMoves })));
@@ -25,6 +26,14 @@ function App() {
         <ErrorBoundary>
           <Suspense fallback={<div className="h-24 bg-white" />}>
             <Services />
+          </Suspense>
+        </ErrorBoundary>
+        {/* Box shop teaser — placed right after Services, where "what do you
+            offer?" naturally leads into supplies, and before the trust-building
+            About → Testimonials → FAQ run-up to the estimate form. */}
+        <ErrorBoundary>
+          <Suspense fallback={<div className="h-24 bg-[#0A0A0A]" />}>
+            <OrderBoxes />
           </Suspense>
         </ErrorBoundary>
         <ErrorBoundary>
