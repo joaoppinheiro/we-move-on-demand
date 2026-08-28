@@ -9,8 +9,13 @@
  * "fix" it to match the pattern of the other Deluxe tiers.
  */
 
+/** Move size a bundle is built for — drives the filter on the bundles section. */
+export type BundleSize = 'college' | '1br' | '2br' | '3br' | '4br';
+
 export type Bundle = {
   id: string;
+  /** Groups the standard and Deluxe tiers of the same move size together. */
+  size: BundleSize;
   name: string;
   /** Total number of boxes in the bundle. */
   boxCount: number;
@@ -24,9 +29,24 @@ export type Bundle = {
   deluxe: boolean;
 };
 
+/**
+ * Filter options for the bundles section, in display order. "All" is included
+ * so the section has a defined default (every bundle visible) and so clearing
+ * the toggle can never leave the grid empty.
+ */
+export const bundleSizeFilters: { value: BundleSize | 'all'; label: string }[] = [
+  { value: 'all', label: 'All' },
+  { value: 'college', label: 'College' },
+  { value: '1br', label: '1 Bedroom' },
+  { value: '2br', label: '2 Bedroom' },
+  { value: '3br', label: '3 Bedroom' },
+  { value: '4br', label: '4 Bedroom' },
+];
+
 export const bundles: Bundle[] = [
   {
     id: 'bundle-college',
+    size: 'college',
     name: 'College Moving Bundle',
     boxCount: 10,
     summary: '10 Boxes + Packing Supplies',
@@ -44,6 +64,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: 'bundle-1br',
+    size: '1br',
     name: '1 Bedroom Bundle',
     boxCount: 27,
     summary: '27 Boxes + Packing Supplies',
@@ -62,6 +83,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: 'bundle-1br-deluxe',
+    size: '1br',
     name: '1 Bedroom Deluxe Bundle',
     boxCount: 30,
     summary: '30 Boxes + Packing Supplies',
@@ -82,6 +104,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: 'bundle-2br',
+    size: '2br',
     name: '2 Bedroom Bundle',
     boxCount: 39,
     summary: '39 Boxes + Packing Supplies',
@@ -100,6 +123,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: 'bundle-2br-deluxe',
+    size: '2br',
     name: '2 Bedroom Deluxe Bundle',
     boxCount: 44,
     summary: '44 Boxes + Packing Supplies',
@@ -120,6 +144,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: 'bundle-3br',
+    size: '3br',
     name: '3 Bedroom Bundle',
     boxCount: 60,
     summary: '60 Boxes + Packing Supplies',
@@ -138,6 +163,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: 'bundle-3br-deluxe',
+    size: '3br',
     name: '3 Bedroom Deluxe Bundle',
     boxCount: 69,
     summary: '69 Boxes + Packing Supplies',
@@ -158,6 +184,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: 'bundle-4br',
+    size: '4br',
     name: '4 Bedroom Bundle',
     boxCount: 94,
     summary: '94 Boxes + Packing Supplies',
@@ -176,6 +203,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: 'bundle-4br-deluxe',
+    size: '4br',
     name: '4 Bedroom Deluxe Bundle',
     boxCount: 105,
     summary: '105 Boxes + Packing Supplies',

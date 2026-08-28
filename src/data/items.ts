@@ -15,6 +15,12 @@ export type CatalogItem = {
   category: ItemCategory;
   /** Optional helper line under the name. */
   note?: string;
+  /**
+   * Public path to the product photo, e.g. '/images/products/small-box.webp'.
+   * Omitted for now on every item — ProductImage renders a placeholder until a
+   * path is set here. See the TODO in ProductImage.tsx for the swap-in steps.
+   */
+  image?: string;
 };
 
 export const items: CatalogItem[] = [

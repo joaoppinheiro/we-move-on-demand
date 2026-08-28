@@ -1,20 +1,33 @@
 import { useState } from 'react';
-import { Recycle, Info, MessageSquare, ArrowRight } from 'lucide-react';
+import { Recycle, Info, MessageSquare, ArrowRight, Phone } from 'lucide-react';
 import {
   reusableItems,
   REUSABLE_AVAILABILITY_NOTICE,
   REUSABLE_SMS_BODY,
 } from '@/data/reusable';
 import { useCart } from '@/lib/cart';
-import { smsLink, SMS_PHONE_NUMBER } from '@/lib/constants';
+import { smsLink, IS_SMS_CONFIGURED, PHONE_TEL } from '@/lib/constants';
 import { QuantityStepper } from './QuantityStepper';
 import { AddToCartButton } from './AddToCartButton';
+import { ProductImage } from './ProductImage';
 
-function ReusableCard({ id, name, note }: { id: string; name: string; note: string }) {
+function ReusableCard({
+  id,
+  name,
+  note,
+  image,
+}: {
+  id: string;
+  name: string;
+  note: string;
+  image?: string;
+}) {
   const [qty, setQty] = useState(1);
 
   return (
     <article className="flex flex-col bg-white/5 border border-white/10 rounded-3xl p-6">
+      <ProductImage src={image} alt={name} tone="dark" />
+
       <h3 className="text-lg font-bold text-white leading-tight mb-2">{name}</h3>
 
       <div className="flex-1 mb-5">
@@ -46,7 +59,7 @@ export function ReusableBoxes() {
   const { hasReusable, openCart } = useCart();
 
   return (
-    <section id="reusable" className="relative py-16 lg:py-24 bg-[#0A0A0A] scroll-mt-20 overflow-hidden">
+    <section id="reusable" className="relative py-16 lg:py-24 bg-[#0A0A0A] scroll-mt-32 overflow-hidden">
       <div
         className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#a02135]/20 rounded-full blur-3xl pointer-events-none"
         aria-hidden="true"
@@ -85,20 +98,39 @@ export function ReusableBoxes() {
         {/* Request-only catalog */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {reusableItems.map((item) => (
-            <ReusableCard key={item.id} id={item.id} name={item.name} note={item.note} />
+            <ReusableCard
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              note={item.note}
+              image={item.image}
+            />
           ))}
         </div>
 
-        {/* Text Us — lives here rather than as a second floating button, so it
-            doesn't compete with the floating cart on mobile. */}
+        {/* Contact CTAs — kept in this section rather than as a second floating
+            button, so they don't compete with the cart button on mobile. */}
         <div className="mt-12 flex flex-col sm:flex-row gap-3 sm:items-center">
-          <a
-            href={smsLink(REUSABLE_SMS_BODY)}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-[#0A0A0A] text-sm font-bold uppercase tracking-widest px-8 py-5 rounded-full hover:bg-[#c41e46] hover:text-white transition-colors shadow-lg"
-          >
-            <MessageSquare className="w-4 h-4" aria-hidden="true" />
-            Text Us to Confirm Availability
-          </a>
+          {IS_SMS_CONFIGURED ? (
+            <a
+              href={smsLink(REUSABLE_SMS_BODY)}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-[#0A0A0A] text-sm font-bold uppercase tracking-widest px-8 py-5 rounded-full hover:bg-[#c41e46] hover:text-white transition-colors shadow-lg"
+            >
+              <MessageSquare className="w-4 h-4" aria-hidden="true" />
+              Text Us to Confirm Availability
+            </a>
+          ) : (
+            /* No SMS number yet — fall back to the phone line so this section
+               still has a working contact CTA. Swap back automatically once
+               SMS_PHONE_NUMBER is filled in. */
+            <a
+              href={PHONE_TEL}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-[#0A0A0A] text-sm font-bold uppercase tracking-widest px-8 py-5 rounded-full hover:bg-[#c41e46] hover:text-white transition-colors shadow-lg"
+            >
+              <Phone className="w-4 h-4" aria-hidden="true" />
+              Call to Confirm Availability
+            </a>
+          )}
 
           {hasReusable && (
             <button
@@ -112,11 +144,11 @@ export function ReusableBoxes() {
           )}
         </div>
 
-        {/* Visible build-time reminder — remove together with the placeholder. */}
-        {SMS_PHONE_NUMBER.startsWith('[') && (
+        {/* Dev-only reminder. Never rendered in production — customers must not
+            see internal TODOs. Disappears for good once the number is set. */}
+        {import.meta.env.DEV && !IS_SMS_CONFIGURED && (
           <p className="mt-5 text-xs font-bold uppercase tracking-widest text-yellow-400">
-            ⚠ TODO: replace SMS_PHONE_NUMBER placeholder in src/lib/constants.ts — the Text Us link is
-            not functional yet.
+            ⚠ DEV ONLY — set SMS_PHONE_NUMBER in src/lib/constants.ts to enable the Text Us buttons.
           </p>
         )}
       </div>

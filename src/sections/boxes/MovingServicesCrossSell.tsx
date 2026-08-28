@@ -5,7 +5,7 @@ export function MovingServicesCrossSell() {
   return (
     <section
       id="moving-services"
-      className="relative py-16 lg:py-24 bg-white scroll-mt-20 overflow-hidden"
+      className="relative py-16 lg:py-24 bg-white scroll-mt-32 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="bg-[#F3F3F1] rounded-3xl p-8 lg:p-14">

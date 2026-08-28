@@ -17,6 +17,11 @@ export type ReusableItem = {
   /** Always null while pricing is pending — see TODO above. */
   price: null;
   note: string;
+  /**
+   * Public path to the product photo. Omitted for now — ProductImage renders a
+   * placeholder until a path is set. See the TODO in ProductImage.tsx.
+   */
+  image?: string;
 };
 
 export const reusableItems: ReusableItem[] = [

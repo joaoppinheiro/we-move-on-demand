@@ -1,11 +1,6 @@
-import { useState } from 'react';
 import { Truck, MapPin, CheckCircle2, XCircle, PackageCheck } from 'lucide-react';
-import {
-  deliveryAreas,
-  isEligibleZip,
-  FREE_DELIVERY_THRESHOLD,
-  LOCAL_DELIVERY_FEE,
-} from '@/data/delivery';
+import { deliveryAreas, FREE_DELIVERY_THRESHOLD, LOCAL_DELIVERY_FEE } from '@/data/delivery';
+import { useZipCheck } from '@/hooks/useZipCheck';
 
 /*
  * TODO: lógica de cálculo de frete precisa rodar como Vercel Function antes de
@@ -17,10 +12,9 @@ import {
  */
 
 function ZipChecker() {
-  const [zip, setZip] = useState('');
-  const trimmed = zip.trim();
-  const isComplete = /^\d{5}$/.test(trimmed);
-  const eligible = isComplete && isEligibleZip(trimmed);
+  // Same hook (and therefore same ZIP list + same check) as the sticky
+  // DeliveryBar at the top of the page.
+  const { zip, onZipChange, status } = useZipCheck();
 
   return (
     <div className="bg-white rounded-3xl p-6 lg:p-7">
@@ -34,7 +28,7 @@ function ZipChecker() {
           inputMode="numeric"
           maxLength={5}
           value={zip}
-          onChange={(e) => setZip(e.target.value.replace(/\D/g, ''))}
+          onChange={(e) => onZipChange(e.target.value)}
           placeholder="Enter ZIP code"
           aria-label="Delivery ZIP code"
           className="flex-1 bg-[#F3F3F1] border border-gray-200 rounded-xl px-4 py-3.5 text-[#0A0A0A] placeholder:text-gray-500 focus:outline-none focus:border-[#a02135] focus:ring-2 focus:ring-[#a02135]/10 transition-all"
@@ -42,17 +36,17 @@ function ZipChecker() {
       </div>
 
       <div aria-live="polite" className="mt-4 min-h-[24px]">
-        {isComplete && eligible && (
+        {status === 'eligible' && (
           <p className="flex items-start gap-2 text-sm font-semibold text-green-700">
             <CheckCircle2 className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
-            Great news — we deliver to {trimmed}.
+            Great news — we deliver to {zip}.
           </p>
         )}
-        {isComplete && !eligible && (
+        {status === 'ineligible' && (
           <p className="flex items-start gap-2 text-sm font-semibold text-gray-600">
             <XCircle className="w-5 h-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            {trimmed} isn't in our local delivery area yet — give us a call and we'll find an option
-            for you.
+            {zip} isn't in our local delivery area yet — give us a call and we'll find an option for
+            you.
           </p>
         )}
       </div>
@@ -62,7 +56,7 @@ function ZipChecker() {
 
 export function LocalDelivery() {
   return (
-    <section id="delivery" className="relative py-16 lg:py-24 bg-[#F3F3F1] scroll-mt-20 overflow-hidden">
+    <section id="delivery" className="relative py-16 lg:py-24 bg-[#F3F3F1] scroll-mt-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* Copy */}

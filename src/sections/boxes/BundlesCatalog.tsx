@@ -1,11 +1,21 @@
+import { useState } from 'react';
 import { Check, Sparkles } from 'lucide-react';
-import { bundles } from '@/data/bundles';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { bundles, bundleSizeFilters, type BundleSize } from '@/data/bundles';
 import { formatPrice } from '@/lib/cart';
 import { AddToCartButton } from './AddToCartButton';
 
+type Filter = BundleSize | 'all';
+
 export function BundlesCatalog() {
+  const [filter, setFilter] = useState<Filter>('all');
+
+  // Filtering by move size keeps the standard and Deluxe tiers of the same size
+  // together, since they share a `size` value.
+  const visible = filter === 'all' ? bundles : bundles.filter((b) => b.size === filter);
+
   return (
-    <section id="bundles" className="relative py-16 lg:py-24 bg-[#F3F3F1] scroll-mt-20 overflow-hidden">
+    <section id="bundles" className="relative py-16 lg:py-24 bg-[#F3F3F1] scroll-mt-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-12 lg:mb-16">
           <span className="section-label mb-4 block">Ready-to-Go</span>
@@ -18,8 +28,39 @@ export function BundlesCatalog() {
           </p>
         </div>
 
+        {/* Size filter. Radix ToggleGroup gives roving-tabindex arrow-key
+            navigation and aria-pressed state for free. */}
+        <div className="flex justify-center mb-10 lg:mb-12">
+          <ToggleGroup
+            type="single"
+            value={filter}
+            /* Radix emits '' when the active item is clicked again — fall back
+               to 'all' so the grid can never end up empty. */
+            onValueChange={(value) => setFilter((value as Filter) || 'all')}
+            spacing={2}
+            aria-label="Filter bundles by move size"
+            className="flex-wrap justify-center gap-2 w-full max-w-3xl bg-transparent rounded-none"
+          >
+            {bundleSizeFilters.map((option) => (
+              <ToggleGroupItem
+                key={option.value}
+                value={option.value}
+                aria-label={`Show ${option.label} bundles`}
+                className="h-auto rounded-full border border-gray-200 bg-white px-5 py-3 text-xs font-bold uppercase tracking-widest text-gray-600 shadow-none transition-colors hover:bg-[#a02135]/10 hover:text-[#a02135] focus-visible:ring-2 focus-visible:ring-[#a02135]/40 data-[state=on]:bg-[#a02135] data-[state=on]:text-white data-[state=on]:border-[#a02135]"
+              >
+                {option.label}
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
+        </div>
+
+        {/* Announces the result of changing the filter to screen readers. */}
+        <p aria-live="polite" className="sr-only">
+          {visible.length} {visible.length === 1 ? 'bundle' : 'bundles'} shown
+        </p>
+
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {bundles.map((bundle) => (
+          {visible.map((bundle) => (
             <article
               key={bundle.id}
               className={`flex flex-col bg-white rounded-3xl p-6 lg:p-7 border-2 transition-shadow hover:shadow-xl ${

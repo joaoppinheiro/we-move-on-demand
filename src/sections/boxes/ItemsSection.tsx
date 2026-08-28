@@ -3,12 +3,15 @@ import { formatPrice } from '@/lib/cart';
 import type { CatalogItem } from '@/data/items';
 import { QuantityStepper } from './QuantityStepper';
 import { AddToCartButton } from './AddToCartButton';
+import { ProductImage } from './ProductImage';
 
 function ItemCard({ item, variant }: { item: CatalogItem; variant: 'primary' | 'dark' }) {
   const [qty, setQty] = useState(1);
 
   return (
     <article className="flex flex-col bg-white rounded-3xl p-6 border-2 border-transparent hover:shadow-xl transition-shadow">
+      <ProductImage src={item.image} alt={item.name} />
+
       <h3 className="text-lg font-bold text-[#0A0A0A] leading-tight mb-2">{item.name}</h3>
 
       {/* flex-1 wrapper (not the <p>) so cards without a note still align */}
@@ -70,7 +73,7 @@ export function ItemsSection({
   return (
     <section
       id={id}
-      className={`relative py-16 lg:py-24 scroll-mt-20 overflow-hidden ${
+      className={`relative py-16 lg:py-24 scroll-mt-32 overflow-hidden ${
         background === 'white' ? 'bg-white' : 'bg-[#F3F3F1]'
       }`}
     >

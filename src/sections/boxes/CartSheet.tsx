@@ -21,7 +21,7 @@ import {
   FREE_DELIVERY_THRESHOLD,
   LOCAL_DELIVERY_FEE,
 } from '@/data/delivery';
-import { smsLink } from '@/lib/constants';
+import { smsLink, IS_SMS_CONFIGURED } from '@/lib/constants';
 import { REUSABLE_SMS_BODY } from '@/data/reusable';
 import { QuantityStepper } from './QuantityStepper';
 import { RequestAvailabilityDialog } from './RequestAvailabilityDialog';
@@ -105,6 +105,8 @@ export function CartSheet() {
                         min={0}
                         label={`Quantity of ${line.name}`}
                         size="sm"
+                        /* Shrink to content here so the line total keeps its room */
+                        stretch={false}
                       />
                       <span className="font-bold text-[#0A0A0A] tabular-nums text-sm">
                         {line.price === null ? (
@@ -189,13 +191,16 @@ export function CartSheet() {
                     <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </button>
 
-                  <a
-                    href={smsLink(REUSABLE_SMS_BODY)}
-                    className="w-full inline-flex items-center justify-center gap-2 border border-gray-200 text-[#0A0A0A] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-full hover:bg-[#F3F3F1] transition-colors"
-                  >
-                    <MessageSquare className="w-4 h-4" aria-hidden="true" />
-                    Text Us to Confirm Availability
-                  </a>
+                  {/* Hidden until SMS_PHONE_NUMBER is set — no dead sms: links. */}
+                  {IS_SMS_CONFIGURED && (
+                    <a
+                      href={smsLink(REUSABLE_SMS_BODY)}
+                      className="w-full inline-flex items-center justify-center gap-2 border border-gray-200 text-[#0A0A0A] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-full hover:bg-[#F3F3F1] transition-colors"
+                    >
+                      <MessageSquare className="w-4 h-4" aria-hidden="true" />
+                      Text Us to Confirm Availability
+                    </a>
+                  )}
                 </div>
               ) : (
                 <div className="w-full space-y-2.5">

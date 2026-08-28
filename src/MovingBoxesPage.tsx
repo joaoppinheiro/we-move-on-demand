@@ -4,6 +4,7 @@ import { itemsByCategory } from '@/data/items';
 import { Footer } from '@/sections/Footer';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { BoxesHeader } from '@/sections/boxes/BoxesHeader';
+import { DeliveryBar } from '@/sections/boxes/DeliveryBar';
 import { BoxesHero } from '@/sections/boxes/BoxesHero';
 import { ShopByCategory } from '@/sections/boxes/ShopByCategory';
 import { BundlesCatalog } from '@/sections/boxes/BundlesCatalog';
@@ -31,6 +32,9 @@ export default function MovingBoxesPage() {
     <CartProvider>
       <div className="min-h-screen bg-[#F3F3F1]">
         <BoxesHeader />
+        {/* Sticky at top-20, stacking under the h-20 header rather than over it.
+            Section anchors use scroll-mt-32 to clear both. */}
+        <DeliveryBar />
 
         <main>
           <BoxesHero />

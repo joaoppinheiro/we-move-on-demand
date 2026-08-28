@@ -3,7 +3,7 @@ import { AlertCircle, CheckCircle, Loader2, MessageSquare, Phone, Send } from 'l
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useCart, formatPrice } from '@/lib/cart';
 import { useAvailabilityRequest } from '@/hooks/useAvailabilityRequest';
-import { PHONE_TEL, smsLink } from '@/lib/constants';
+import { PHONE_TEL, smsLink, IS_SMS_CONFIGURED } from '@/lib/constants';
 import { REUSABLE_SMS_BODY } from '@/data/reusable';
 
 const inputCls =
@@ -84,13 +84,16 @@ export function RequestAvailabilityDialog({ open, onOpenChange }: RequestAvailab
                   <Phone className="w-4 h-4" aria-hidden="true" />
                   Call Now
                 </a>
-                <a
-                  href={smsLink(REUSABLE_SMS_BODY)}
-                  className="flex-1 inline-flex items-center justify-center gap-2 border border-[#a02135]/30 text-[#a02135] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-full hover:bg-[#a02135]/10 transition-colors"
-                >
-                  <MessageSquare className="w-4 h-4" aria-hidden="true" />
-                  Text Us
-                </a>
+                {/* Hidden until SMS_PHONE_NUMBER is set — no dead sms: links. */}
+                {IS_SMS_CONFIGURED && (
+                  <a
+                    href={smsLink(REUSABLE_SMS_BODY)}
+                    className="flex-1 inline-flex items-center justify-center gap-2 border border-[#a02135]/30 text-[#a02135] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-full hover:bg-[#a02135]/10 transition-colors"
+                  >
+                    <MessageSquare className="w-4 h-4" aria-hidden="true" />
+                    Text Us
+                  </a>
+                )}
               </div>
             </div>
           </>
