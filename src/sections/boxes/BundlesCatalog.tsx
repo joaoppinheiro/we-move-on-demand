@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import { Check, Sparkles } from 'lucide-react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { bundles, bundleSizeFilters, type BundleSize } from '@/data/bundles';
+import {
+  bundles,
+  bundleSizeFilters,
+  BUNDLE_DEFAULT_FILTER,
+  type BundleSize,
+} from '@/data/bundles';
 import { formatPrice } from '@/lib/cart';
 import { AddToCartButton } from './AddToCartButton';
 
 type Filter = BundleSize | 'all';
 
 export function BundlesCatalog() {
-  const [filter, setFilter] = useState<Filter>('all');
+  const [filter, setFilter] = useState<Filter>(BUNDLE_DEFAULT_FILTER);
 
   // Filtering by move size keeps the standard and Deluxe tiers of the same size
   // together, since they share a `size` value.

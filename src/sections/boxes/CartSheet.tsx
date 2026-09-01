@@ -21,15 +21,32 @@ import {
   FREE_DELIVERY_THRESHOLD,
   LOCAL_DELIVERY_FEE,
 } from '@/data/delivery';
-import { smsLink, IS_SMS_CONFIGURED } from '@/lib/constants';
+import { smsLink, IS_SMS_CONFIGURED, SHOW_REUSABLE_BOXES } from '@/lib/constants';
 import { REUSABLE_SMS_BODY } from '@/data/reusable';
 import { QuantityStepper } from './QuantityStepper';
 import { RequestAvailabilityDialog } from './RequestAvailabilityDialog';
 
 export function CartSheet() {
-  const { lines, itemCount, subtotal, hasReusable, isOpen, setOpen, setQty, remove, closeCart } =
-    useCart();
+  const {
+    lines,
+    itemCount,
+    subtotal,
+    hasReusable: cartHasReusable,
+    isOpen,
+    setOpen,
+    setQty,
+    remove,
+    closeCart,
+  } = useCart();
   const [requestOpen, setRequestOpen] = useState(false);
+
+  /* The mixed-cart logic below is unchanged; this only makes sure the request
+     flow stays unreachable while the reusable offering is switched off. In
+     practice cartHasReusable is already always false then — the reusable
+     section is the only entry point for those lines and the cart is
+     in-memory — so this is belt-and-braces. Flipping SHOW_REUSABLE_BOXES back
+     to true restores the original behaviour. */
+  const hasReusable = SHOW_REUSABLE_BOXES && cartHasReusable;
 
   const qualifiesForFreeDelivery = subtotal >= FREE_DELIVERY_THRESHOLD;
   const amountToFreeDelivery = Math.max(0, FREE_DELIVERY_THRESHOLD - subtotal);
@@ -241,7 +258,10 @@ export function CartSheet() {
         </SheetContent>
       </Sheet>
 
-      <RequestAvailabilityDialog open={requestOpen} onOpenChange={setRequestOpen} />
+      {/* Reusable-only form — not mounted while SHOW_REUSABLE_BOXES is false */}
+      {SHOW_REUSABLE_BOXES && (
+        <RequestAvailabilityDialog open={requestOpen} onOpenChange={setRequestOpen} />
+      )}
     </>
   );
 }

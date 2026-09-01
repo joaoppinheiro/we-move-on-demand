@@ -13,6 +13,7 @@ import { ReusableBoxes } from '@/sections/boxes/ReusableBoxes';
 import { LocalDelivery } from '@/sections/boxes/LocalDelivery';
 import { MovingServicesCrossSell } from '@/sections/boxes/MovingServicesCrossSell';
 import { CartSheet } from '@/sections/boxes/CartSheet';
+import { SHOW_REUSABLE_BOXES } from '@/lib/constants';
 
 /**
  * /moving-boxes — box & packing supply shop.
@@ -84,9 +85,12 @@ export default function MovingBoxesPage() {
             />
           </ErrorBoundary>
 
-          <ErrorBoundary>
-            <ReusableBoxes />
-          </ErrorBoundary>
+          {/* Gated by SHOW_REUSABLE_BOXES — see src/lib/constants.ts */}
+          {SHOW_REUSABLE_BOXES && (
+            <ErrorBoundary>
+              <ReusableBoxes />
+            </ErrorBoundary>
+          )}
 
           <ErrorBoundary>
             <LocalDelivery />

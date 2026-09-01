@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { ShoppingCart, Phone, ArrowLeft } from 'lucide-react';
 import { useCart } from '@/lib/cart';
-import { PHONE_TEL, PHONE_LABEL } from '@/lib/constants';
+import { PHONE_TEL, PHONE_LABEL, SHOW_REUSABLE_BOXES } from '@/lib/constants';
 
+/* The Reusable link is dropped while SHOW_REUSABLE_BOXES is false, so the nav
+   never points at a section that isn't rendered. */
 const shopLinks = [
   { label: 'Bundles', href: '#bundles' },
   { label: 'Boxes', href: '#boxes' },
   { label: 'Office', href: '#office-boxes' },
   { label: 'Supplies', href: '#packing-supplies' },
-  { label: 'Reusable', href: '#reusable' },
+  ...(SHOW_REUSABLE_BOXES ? [{ label: 'Reusable', href: '#reusable' }] : []),
   { label: 'Delivery', href: '#delivery' },
 ];
 

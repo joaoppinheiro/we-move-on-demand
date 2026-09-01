@@ -12,6 +12,22 @@ export const LEAD_EMAIL = 'move@wemoveondemand.com';
 export const MOVING_BOXES_URL = '/moving-boxes';
 
 /**
+ * Master switch for the reusable (plastic) moving box offering.
+ *
+ * False = temporarily off. The whole "Pack. Stack. Move. Reuse." section, its
+ * header nav link and every "Confirm Availability" affordance (including the
+ * RequestAvailabilityDialog form) stop rendering. Nothing is deleted: the
+ * components, the reusable catalog in src/data/reusable.ts, the api/
+ * box-availability.ts endpoint and the mixed-cart handling in CartSheet all
+ * stay in place and come back by flipping this to true.
+ *
+ * Because the section is the only place a `kind: 'reusable'` line can enter the
+ * cart, hasReusable is unreachable while this is false — the cart's reusable
+ * branch is inert rather than removed.
+ */
+export const SHOW_REUSABLE_BOXES: boolean = false;
+
+/**
  * ⚠️ TODO: NÚMERO DE TELEFONE DO NEGÓCIO PARA SMS AINDA NÃO DEFINIDO. ⚠️
  *
  * Replace the placeholder below with the real SMS-capable business number

@@ -30,18 +30,22 @@ export type Bundle = {
 };
 
 /**
- * Filter options for the bundles section, in display order. "All" is included
- * so the section has a defined default (every bundle visible) and so clearing
- * the toggle can never leave the grid empty.
+ * Filter options for the bundles section, in display order: smallest move size
+ * first, with "All" last as the widen-the-search escape hatch. "All" is also
+ * the fallback whenever the toggle is cleared, so the grid can never end up
+ * empty. The default selection is BUNDLE_DEFAULT_FILTER, not "all".
  */
 export const bundleSizeFilters: { value: BundleSize | 'all'; label: string }[] = [
-  { value: 'all', label: 'All' },
   { value: 'college', label: 'College' },
   { value: '1br', label: '1 Bedroom' },
   { value: '2br', label: '2 Bedroom' },
   { value: '3br', label: '3 Bedroom' },
   { value: '4br', label: '4 Bedroom' },
+  { value: 'all', label: 'All' },
 ];
+
+/** Filter selected on page load. */
+export const BUNDLE_DEFAULT_FILTER: BundleSize | 'all' = 'college';
 
 export const bundles: Bundle[] = [
   {
