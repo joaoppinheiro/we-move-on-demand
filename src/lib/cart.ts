@@ -12,14 +12,18 @@ import { createContext, useContext } from 'react';
  * not navigation.
  */
 
-export type CartLineKind = 'bundle' | 'item' | 'reusable';
+/**
+ * 'bundle' and 'item' are bought and kept; 'rental' is a reusable moving bin
+ * package rented for a fixed term and picked back up. Every kind carries a real
+ * price — there is no priced-on-request line anymore.
+ */
+export type CartLineKind = 'bundle' | 'item' | 'rental';
 
 export type CartLine = {
   id: string;
   name: string;
   kind: CartLineKind;
-  /** null = quoted by the team (reusable boxes), excluded from the subtotal. */
-  price: number | null;
+  price: number;
   /** Short descriptor shown under the name, e.g. "44 Boxes + Packing Supplies". */
   meta?: string;
   qty: number;
@@ -31,12 +35,10 @@ export type CartContextValue = {
   lines: CartLine[];
   /** Total units across all lines (what the header badge shows). */
   itemCount: number;
-  /** Sum of priced lines only, rounded to cents. */
+  /** Sum of every line, rounded to cents. */
   subtotal: number;
-  /** True when at least one reusable box is in the cart. */
-  hasReusable: boolean;
-  /** True when at least one priced (bundle/item) line is in the cart. */
-  hasPricedLines: boolean;
+  /** True when at least one reusable bin rental package is in the cart. */
+  hasRental: boolean;
   isOpen: boolean;
   add: (line: NewCartLine, qty?: number) => void;
   setQty: (id: string, qty: number) => void;

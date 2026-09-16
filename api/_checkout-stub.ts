@@ -30,9 +30,10 @@
  *  • Local delivery: FREE at subtotal >= $75, otherwise a flat $15 fee.
  *  • Delivery is only offered to the ZIP codes in src/data/delivery.ts
  *    (Boca Raton / Delray Beach / Deerfield Beach). Reject anything else.
- *  • Reject the whole request if any line is a reusable box — those have no
- *    online price and must go through the "Request Availability" flow
- *    (api/box-availability.ts) instead.
+ *  • Reject the whole request if any line is a bin rental (`rental-*` ids in
+ *    src/data/rentals.ts). Rentals are priced, but the order also carries a
+ *    rental term, a delivery window, a pickup and an equipment count — that
+ *    flow is a separate phase, not a cardboard checkout with extra line items.
  *  • Consider adding Florida sales tax (Stripe Tax or a fixed rate) before
  *    going live — currently NOT handled anywhere.
  *

@@ -2,16 +2,20 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
 
 /**
- * Reusable-box availability request notifications.
+ * Manual cart request notifications.
  *
- * SCOPE: this endpoint exists ONLY for the reusable-box path. Reusable boxes
- * have no online price and depend on current inventory, so those carts are
- * confirmed manually by the team.
+ * ⚠️ CURRENTLY HAS NO CALLER. It was built for the old "reusable box, price on
+ * request" flow, which was replaced by the priced 7-day bin RENTAL program
+ * (src/data/rentals.ts) — so the client-side form and hook that posted here
+ * were removed along with it. The handler is kept because rental fulfilment
+ * (term, delivery window, pickup, equipment count) still needs a manual
+ * request path in a later phase, and this is the lead-notification plumbing for
+ * it. Whoever wires that up must also update the line-kind guard below: it
+ * still demands `kind: 'reusable'`, a kind the cart no longer produces, so as
+ * written it rejects every possible payload.
  *
  * Ordinary carts (bundles + individual items) must NOT be routed here — they
- * go through automated Stripe checkout (see api/_checkout-stub.ts). Requests
- * without at least one reusable line are rejected below to keep that boundary
- * enforced server-side, not just by convention in the UI.
+ * go through automated Stripe checkout (see api/_checkout-stub.ts).
  *
  * Reuses the same lead notification pattern as api/quote.ts (Resend → Eduardo,
  * cc Laila) with the payload adapted to carry the cart contents.

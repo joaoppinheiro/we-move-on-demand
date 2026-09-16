@@ -25,7 +25,7 @@ type ProductImageProps = {
  *   1. Drop the file in `public/images/products/` — this project serves static
  *      images from `public/images/`, which is why there is no src/assets dir.
  *   2. Set `image: '/images/products/<file>.webp'` on that item in
- *      src/data/items.ts or src/data/reusable.ts.
+ *      src/data/items.ts or src/data/rentals.ts.
  * Items without an `image` keep the placeholder, so the catalog can be
  * populated one product at a time.
  */

@@ -6,27 +6,34 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { BoxesHeader } from '@/sections/boxes/BoxesHeader';
 import { DeliveryBar } from '@/sections/boxes/DeliveryBar';
 import { BoxesHero } from '@/sections/boxes/BoxesHero';
+import { ChoosePath } from '@/sections/boxes/ChoosePath';
 import { ShopByCategory } from '@/sections/boxes/ShopByCategory';
 import { BundlesCatalog } from '@/sections/boxes/BundlesCatalog';
 import { ItemsSection } from '@/sections/boxes/ItemsSection';
-import { ReusableBoxes } from '@/sections/boxes/ReusableBoxes';
+import { BinRentals } from '@/sections/boxes/BinRentals';
+import { RentalCrossSell } from '@/sections/boxes/RentalCrossSell';
+import { RentalFAQ } from '@/sections/boxes/RentalFAQ';
 import { LocalDelivery } from '@/sections/boxes/LocalDelivery';
 import { MovingServicesCrossSell } from '@/sections/boxes/MovingServicesCrossSell';
 import { CartSheet } from '@/sections/boxes/CartSheet';
-import { SHOW_REUSABLE_BOXES } from '@/lib/constants';
+import { HelpDock } from '@/sections/boxes/HelpDock';
 
 /**
- * /moving-boxes — box & packing supply shop.
+ * /moving-boxes — box shop and reusable bin rentals.
  *
  * Built as ONE page with in-page anchors rather than sub-routes per category:
  * the site has no client-side router (each route is a separate Vite/HTML entry),
  * so category sub-routes would mean full page loads — which would wipe the
  * client-side cart between "Shop Bundles" and "Shop Boxes". Single page keeps
  * the cart intact while the category cards still act as navigation.
+ *
+ * Section order follows the BUY / RENT split introduced by ChoosePath: the
+ * cardboard shop in full, then the rental program with its own delivery policy,
+ * cross-sell and FAQ, then the shared local-delivery details.
  */
 export default function MovingBoxesPage() {
   useEffect(() => {
-    document.title = 'Moving Boxes & Packing Supplies — We Move On Demand';
+    document.title = 'Moving Boxes, Packing Supplies & Bin Rentals — We Move On Demand';
   }, []);
 
   return (
@@ -40,6 +47,11 @@ export default function MovingBoxesPage() {
         <main>
           <BoxesHero />
 
+          <ErrorBoundary>
+            <ChoosePath />
+          </ErrorBoundary>
+
+          {/* ------------------------------------------------------- BUY --- */}
           <ErrorBoundary>
             <ShopByCategory />
           </ErrorBoundary>
@@ -85,12 +97,18 @@ export default function MovingBoxesPage() {
             />
           </ErrorBoundary>
 
-          {/* Gated by SHOW_REUSABLE_BOXES — see src/lib/constants.ts */}
-          {SHOW_REUSABLE_BOXES && (
-            <ErrorBoundary>
-              <ReusableBoxes />
-            </ErrorBoundary>
-          )}
+          {/* ------------------------------------------------------ RENT --- */}
+          <ErrorBoundary>
+            <BinRentals />
+          </ErrorBoundary>
+
+          <ErrorBoundary>
+            <RentalCrossSell />
+          </ErrorBoundary>
+
+          <ErrorBoundary>
+            <RentalFAQ />
+          </ErrorBoundary>
 
           <ErrorBoundary>
             <LocalDelivery />
@@ -104,8 +122,9 @@ export default function MovingBoxesPage() {
         {/* hashPrefix="/" so the footer's home anchors resolve back to the home page */}
         <Footer hashPrefix="/" />
 
-        {/* Cart lives outside <main> so it overlays every section */}
+        {/* Cart and help dock live outside <main> so they overlay every section */}
         <CartSheet />
+        <HelpDock />
       </div>
     </CartProvider>
   );

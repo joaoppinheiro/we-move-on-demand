@@ -156,3 +156,21 @@ export const items: CatalogItem[] = [
 export function itemsByCategory(category: ItemCategory): CatalogItem[] {
   return items.filter((item) => item.category === category);
 }
+
+/**
+ * Looks up items by id, in the order the ids were given, skipping ids that
+ * don't exist. Used by the rental section's cross-sell so it can reference
+ * cardboard products by id instead of restating their names and prices.
+ */
+export function itemsByIds(ids: readonly string[]): CatalogItem[] {
+  return ids
+    .map((id) => items.find((item) => item.id === id))
+    .filter((item): item is CatalogItem => item !== undefined);
+}
+
+/** Anchor of the shop section a given item lives in, for in-page links. */
+export const categoryAnchors: Record<ItemCategory, string> = {
+  boxes: '#boxes',
+  office: '#office-boxes',
+  supplies: '#packing-supplies',
+};

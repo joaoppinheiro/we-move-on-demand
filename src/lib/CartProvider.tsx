@@ -44,15 +44,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<CartContextValue>(() => {
     const itemCount = lines.reduce((sum, l) => sum + l.qty, 0);
-    const subtotal = roundCents(
-      lines.reduce((sum, l) => (l.price === null ? sum : sum + l.price * l.qty), 0)
-    );
+    const subtotal = roundCents(lines.reduce((sum, l) => sum + l.price * l.qty, 0));
     return {
       lines,
       itemCount,
       subtotal,
-      hasReusable: lines.some((l) => l.kind === 'reusable'),
-      hasPricedLines: lines.some((l) => l.price !== null),
+      hasRental: lines.some((l) => l.kind === 'rental'),
       isOpen,
       add,
       setQty,

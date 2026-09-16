@@ -43,7 +43,7 @@ export function ShopByCategory() {
     <section id="shop" className="relative py-16 lg:py-24 bg-white scroll-mt-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-12 lg:mb-16">
-          <span className="section-label mb-4 block">Where to Start</span>
+          <span className="section-label mb-4 block">Buy — Boxes &amp; Supplies</span>
           <h2 className="heading-section mb-6">
             Shop by <span className="text-[#a02135]">Category</span>
           </h2>

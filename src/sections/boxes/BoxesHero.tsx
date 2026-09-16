@@ -27,12 +27,14 @@ export function BoxesHero() {
               bundles based on the size of your home. Local delivery available.
             </p>
 
-            {/* Primary CTA — full width on mobile */}
+            {/* Primary CTA — full width on mobile. Points at the buy-vs-rent
+                chooser rather than straight at the cardboard shop, so both
+                paths get the same billing. */}
             <a
-              href="#shop"
+              href="#choose"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#a02135] text-white text-sm font-bold uppercase tracking-widest px-8 py-5 rounded-full hover:bg-[#c41e46] hover:scale-[1.02] transition-all shadow-lg"
             >
-              Order Moving Boxes
+              Shop Boxes &amp; Bin Rentals
               <ArrowDown className="w-4 h-4" aria-hidden="true" />
             </a>
 

@@ -9,6 +9,7 @@ import {
 } from '@/data/bundles';
 import { formatPrice } from '@/lib/cart';
 import { AddToCartButton } from './AddToCartButton';
+import { PurchaseBadge } from './PurchaseBadge';
 
 type Filter = BundleSize | 'all';
 
@@ -72,6 +73,9 @@ export function BundlesCatalog() {
                 bundle.deluxe ? 'border-[#a02135]/30' : 'border-transparent'
               }`}
             >
+              {/* Buy-vs-rent tell — see PurchaseBadge */}
+              <PurchaseBadge className="self-start mb-4" />
+
               {/* Eyebrow */}
               <div className="flex items-center justify-between gap-3 mb-4">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">

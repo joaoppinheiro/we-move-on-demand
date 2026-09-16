@@ -4,6 +4,7 @@ import type { CatalogItem } from '@/data/items';
 import { QuantityStepper } from './QuantityStepper';
 import { AddToCartButton } from './AddToCartButton';
 import { ProductImage } from './ProductImage';
+import { PurchaseBadge } from './PurchaseBadge';
 
 function ItemCard({ item, variant }: { item: CatalogItem; variant: 'primary' | 'dark' }) {
   const [qty, setQty] = useState(1);
@@ -11,6 +12,9 @@ function ItemCard({ item, variant }: { item: CatalogItem; variant: 'primary' | '
   return (
     <article className="flex flex-col bg-white rounded-3xl p-6 border-2 border-transparent hover:shadow-xl transition-shadow">
       <ProductImage src={item.image} alt={item.name} />
+
+      {/* Buy-vs-rent tell — see PurchaseBadge */}
+      <PurchaseBadge className="self-start mb-3" />
 
       <h3 className="text-lg font-bold text-[#0A0A0A] leading-tight mb-2">{item.name}</h3>
 
