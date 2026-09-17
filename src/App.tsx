@@ -6,7 +6,16 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import './App.css';
 
 const Services = lazy(() => import('./sections/Services').then(m => ({ default: m.Services })));
-const OrderBoxes = lazy(() => import('./sections/OrderBoxes').then(m => ({ default: m.OrderBoxes })));
+/*
+ * Box shop teaser — REMOVED FROM THE HOME PAGE, component kept on purpose.
+ * The condensed "Our Services" section now carries this job through its
+ * "Moving Supplies" card, which links to the same /moving-boxes route, so the
+ * dark teaser band was saying it twice. Left commented (not deleted) so
+ * restoring it is a two-line uncomment; src/sections/OrderBoxes.tsx still
+ * exists untouched.
+ *
+ * const OrderBoxes = lazy(() => import('./sections/OrderBoxes').then(m => ({ default: m.OrderBoxes })));
+ */
 const About = lazy(() => import('./sections/About').then(m => ({ default: m.About })));
 const Testimonials = lazy(() => import('./sections/Testimonials').then(m => ({ default: m.Testimonials })));
 const RealMoves = lazy(() => import('./sections/RealMoves').then(m => ({ default: m.RealMoves })));
@@ -28,14 +37,16 @@ function App() {
             <Services />
           </Suspense>
         </ErrorBoundary>
-        {/* Box shop teaser — placed right after Services, where "what do you
-            offer?" naturally leads into supplies, and before the trust-building
-            About → Testimonials → FAQ run-up to the estimate form. */}
+        {/* Box shop teaser removed — see the note by the commented-out
+            OrderBoxes import above. To restore, uncomment that import and this
+            block:
+
         <ErrorBoundary>
           <Suspense fallback={<div className="h-24 bg-[#0A0A0A]" />}>
             <OrderBoxes />
           </Suspense>
         </ErrorBoundary>
+        */}
         <ErrorBoundary>
           <Suspense fallback={<div className="h-24 bg-[#F3F3F1]" />}>
             <About />
