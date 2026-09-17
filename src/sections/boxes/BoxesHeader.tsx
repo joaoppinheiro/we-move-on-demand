@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ShoppingCart, Phone, ArrowLeft } from 'lucide-react';
 import { useCart } from '@/lib/cart';
-import { PHONE_TEL, PHONE_LABEL } from '@/lib/constants';
+import { SHOP_PHONE_TEL, SHOP_PHONE_LABEL } from '@/lib/constants';
 
 /* Ordered to mirror the page: the BUY sections first, then the RENT path, then
    delivery. Every entry is an in-page anchor to a section that always renders. */
@@ -67,11 +67,11 @@ export function BoxesHeader() {
             </a>
 
             <a
-              href={PHONE_TEL}
+              href={SHOP_PHONE_TEL}
               className="hidden md:inline-flex items-center gap-2 text-[#a02135] text-xs font-bold uppercase tracking-widest hover:underline"
             >
               <Phone className="w-4 h-4" aria-hidden="true" />
-              {PHONE_LABEL}
+              {SHOP_PHONE_LABEL}
             </a>
 
             {/* Cart — always visible, primary action on this page */}

@@ -1,5 +1,5 @@
 import { Truck, Phone } from 'lucide-react';
-import { PHONE_TEL, PHONE_LABEL } from '@/lib/constants';
+import { SHOP_PHONE_TEL, SHOP_PHONE_LABEL } from '@/lib/constants';
 
 export function MovingServicesCrossSell() {
   return (
@@ -49,11 +49,11 @@ export function MovingServicesCrossSell() {
 
               {/* Working alternative while the estimate form is pending. */}
               <a
-                href={PHONE_TEL}
+                href={SHOP_PHONE_TEL}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-[#a02135] text-sm font-bold uppercase tracking-widest px-8 py-5 rounded-full border border-[#a02135]/30 hover:bg-[#a02135]/10 transition-colors"
               >
                 <Phone className="w-4 h-4" aria-hidden="true" />
-                Call {PHONE_LABEL}
+                Call {SHOP_PHONE_LABEL}
               </a>
             </div>
 

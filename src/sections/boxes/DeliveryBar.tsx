@@ -1,7 +1,7 @@
 import { Truck, CheckCircle2, XCircle, Phone } from 'lucide-react';
 import { useZipCheck } from '@/hooks/useZipCheck';
 import { FREE_DELIVERY_THRESHOLD, LOCAL_DELIVERY_FEE } from '@/data/delivery';
-import { PHONE_TEL, PHONE_LABEL } from '@/lib/constants';
+import { SHOP_PHONE_TEL, SHOP_PHONE_LABEL } from '@/lib/constants';
 
 /**
  * Compact sticky delivery strip with an inline ZIP check.
@@ -63,7 +63,7 @@ export function DeliveryBar() {
                 <XCircle className="w-4 h-4 flex-shrink-0 text-gray-400" aria-hidden="true" />
                 <span className="truncate">
                   <span className="hidden md:inline">Not available in this ZIP — </span>
-                  <a href={PHONE_TEL} className="underline hover:text-white transition-colors">
+                  <a href={SHOP_PHONE_TEL} className="underline hover:text-white transition-colors">
                     <span className="hidden md:inline">call us to check</span>
                     <span className="md:hidden">Call us</span>
                   </a>
@@ -74,11 +74,11 @@ export function DeliveryBar() {
 
           {/* Phone shortcut, desktop only — the bar must stay one row on mobile */}
           <a
-            href={PHONE_TEL}
+            href={SHOP_PHONE_TEL}
             className="hidden lg:inline-flex items-center gap-2 flex-shrink-0 text-[11px] font-bold uppercase tracking-widest text-gray-300 hover:text-white transition-colors"
           >
             <Phone className="w-3.5 h-3.5" aria-hidden="true" />
-            {PHONE_LABEL}
+            {SHOP_PHONE_LABEL}
           </a>
         </div>
       </div>
