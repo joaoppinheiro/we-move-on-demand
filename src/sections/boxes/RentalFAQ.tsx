@@ -4,7 +4,45 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { rentalFaqs } from '@/data/rentals';
+import { rentalFaqs, type RentalFaq, type RentalKind } from '@/data/rentals';
+
+/**
+ * Per-program accent for the comparison headings. Literal class strings in a
+ * static map so Tailwind sees them at build time, same as BinRentals.tsx.
+ */
+const comparisonAccents: Record<RentalKind, string> = {
+  totes: 'text-[#a02135]',
+  crates: 'text-[#2f5fb8]',
+};
+
+/**
+ * Side-by-side tote/crate comparison inside an answer. A plain two-column list
+ * rather than a table: it collapses to one column on narrow screens without any
+ * of the overflow handling a real table would need.
+ */
+function FaqComparison({ comparison }: { comparison: NonNullable<RentalFaq['comparison']> }) {
+  return (
+    <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
+      {comparison.map((column) => (
+        <div key={column.label} className="bg-white rounded-xl p-5">
+          <p
+            className={`text-xs font-bold uppercase tracking-widest mb-3 ${comparisonAccents[column.kind]}`}
+          >
+            {column.label}
+          </p>
+          <dl className="space-y-2.5 text-sm leading-relaxed">
+            {column.points.map((point) => (
+              <div key={point.label}>
+                <dt className="inline font-bold text-[#0A0A0A]">{point.label}: </dt>
+                <dd className="inline text-gray-600">{point.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 /**
  * Rental FAQ — static content, no logic.
@@ -40,6 +78,7 @@ export function RentalFAQ() {
               </AccordionTrigger>
               <AccordionContent className="pb-5 text-base text-gray-600 leading-relaxed">
                 {faq.answer}
+                {faq.comparison && <FaqComparison comparison={faq.comparison} />}
               </AccordionContent>
             </AccordionItem>
           ))}

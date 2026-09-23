@@ -48,6 +48,12 @@ export type RentalProgram = {
   title: string;
   /** Short client-supplied positioning line, e.g. "Heavy-Duty & Versatile". */
   positioning: string;
+  /**
+   * One-line "best for" tagline shown under the program title, so the two
+   * programs can be told apart before reading the full description. The full
+   * comparison lives in the rental FAQ — keep this to a single decisive line.
+   */
+  tagline: string;
   description: string;
   packages: RentalPackage[];
 };
@@ -160,6 +166,7 @@ export const rentalPrograms: RentalProgram[] = [
     kind: 'totes',
     title: 'Red/Black Reusable Totes',
     positioning: 'Heavy-Duty & Versatile',
+    tagline: 'Best for bulky household items',
     description:
       '27-gallon reusable moving totes with separate secure snap-on lids. Best for residential moves, apartments, condos and everyday packing. Stackable up to 5 high.',
     packages: totePackages,
@@ -168,6 +175,7 @@ export const rentalPrograms: RentalProgram[] = [
     kind: 'crates',
     title: 'Blue Professional Moving Crates',
     positioning: 'Built for Efficient Moving',
+    tagline: 'Best for organized everyday packing',
     description:
       'Commercial-style reusable crates with attached/hinged lids. Approximately 27 x 17 x 12 inches. Best for organized residential moves, offices and larger projects. Stackable up to 5 high. No adhesive labels.',
     packages: cratePackages,
@@ -205,6 +213,19 @@ export const RENTAL_SMS_BODY =
   "Hi! I'd like to rent reusable moving bins. Can you help me pick a package?";
 
 /**
+ * Nudge shown under the rental packages, for the customer who has read both
+ * programs and still is not sure. Deliberately points at a person rather than
+ * at more copy — the full tote/crate comparison is already in the FAQ.
+ */
+export const RENTAL_BIN_HELP_NUDGE = {
+  text: 'Not sure which bin is right for your move?',
+  linkLabel: 'Text our team',
+  after: 'and a real person will help you choose.',
+  smsBody:
+    "Hi! I'm not sure whether the red/black totes or the blue crates are right for my move. Can you help me choose?",
+} as const;
+
+/**
  * Cardboard products cross-sold inside the rental section ("Need Specialty
  * Boxes Too?"). These are ids into src/data/items.ts — the names, prices and
  * notes are read from there, never copied, so the two never drift apart.
@@ -218,16 +239,59 @@ export const rentalCrossSellIds = [
   'supply-tape-6',
 ] as const;
 
+export type RentalFaq = {
+  question: string;
+  answer: string;
+  /**
+   * Optional side-by-side comparison rendered as a short list under the answer.
+   * Only the decisive points belong here — the specs (gallons, dimensions,
+   * stacking height) stay in the prose answer and the program descriptions.
+   */
+  comparison?: {
+    label: string;
+    kind: RentalKind;
+    points: { label: string; value: string }[];
+  }[];
+};
+
 /**
  * Rental FAQ — static content, no logic. Answers stay inside what the client
  * defined (7-day term, delivery/pickup and dollies included in the service
  * area, bins stack 5 high) and avoid committing to a delivery time.
  */
-export const rentalFaqs: { question: string; answer: string }[] = [
+export const rentalFaqs: RentalFaq[] = [
   {
     question: 'What is the difference between the red totes and blue crates?',
     answer:
-      "The red/black totes are 27-gallon heavy-duty moving totes with separate snap-on lids — our most versatile option for residential moves, apartments, condos and everyday packing. The blue professional crates are commercial-style crates with attached hinged lids, roughly 27 x 17 x 12 inches, built for organized residential moves, offices and larger projects. Both stack up to 5 high, and both come with the dollies listed on the package.",
+      'Both are reusable, both stack up to 5 high, and both come with the dollies listed on the package. The quickest way to choose:',
+    comparison: [
+      {
+        label: 'Red/Black Totes',
+        kind: 'totes',
+        points: [
+          {
+            label: 'Best for',
+            value:
+              'bulky, lightweight household items — linens, bedding, pillows, clothing, seasonal decor',
+          },
+          { label: 'Lid', value: 'separate, secure snap-on lid' },
+          { label: 'Ideal moves', value: 'homes, apartments and condos' },
+        ],
+      },
+      {
+        label: 'Blue Crates',
+        kind: 'crates',
+        points: [
+          {
+            label: 'Best for',
+            value:
+              'everyday items that benefit from organized stacking — kitchenware, dishes, small appliances, books, office supplies, electronics',
+          },
+          { label: 'Lid', value: 'attached hinged lid, no loose lid to keep track of' },
+          { label: 'Ideal moves', value: 'residential moves, offices and larger organized projects' },
+        ],
+      },
+    ],
   },
   {
     question: 'How many bins do I need?',

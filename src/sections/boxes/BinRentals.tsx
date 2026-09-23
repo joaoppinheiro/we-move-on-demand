@@ -16,6 +16,7 @@ import {
   RENTAL_DELIVERY_POLICY,
   RENTAL_CARD_FOOTNOTE,
   RENTAL_SMS_BODY,
+  RENTAL_BIN_HELP_NUDGE,
   RENTAL_TERM_DAYS,
   type RentalKind,
   type RentalPackage,
@@ -241,9 +242,10 @@ export function BinRentals() {
                 >
                   {program.positioning}
                 </p>
-                <h3 className="text-2xl lg:text-3xl font-bold tracking-tight text-white mb-4">
+                <h3 className="text-2xl lg:text-3xl font-bold tracking-tight text-white mb-2">
                   {program.title}
                 </h3>
+                <p className="text-sm font-semibold text-gray-400 mb-4">{program.tagline}</p>
                 <p className="text-gray-300 leading-relaxed">{program.description}</p>
               </div>
 
@@ -255,6 +257,19 @@ export function BinRentals() {
             </div>
           ))}
         </div>
+
+        {/* Still-not-sure nudge, straight after both package grids */}
+        <p className="mt-10 lg:mt-12 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-300">
+          <span>{RENTAL_BIN_HELP_NUDGE.text}</span>
+          <a
+            href={smsLink(RENTAL_BIN_HELP_NUDGE.smsBody)}
+            className="inline-flex items-center gap-1.5 font-bold text-white underline decoration-[#c41e46] decoration-2 underline-offset-4 hover:text-[#c41e46] transition-colors"
+          >
+            <MessageSquare className="w-4 h-4" aria-hidden="true" />
+            {RENTAL_BIN_HELP_NUDGE.linkLabel}
+          </a>
+          <span>{RENTAL_BIN_HELP_NUDGE.after}</span>
+        </p>
 
         {/* Delivery policy */}
         <div className="mt-16 lg:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
