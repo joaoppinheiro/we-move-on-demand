@@ -1,7 +1,7 @@
 import { Package } from 'lucide-react';
 
 type ProductImageProps = {
-  /** Public path, e.g. '/images/products/small-box.webp'. Omit for placeholder. */
+  /** Public path, e.g. '/images/products/small-box.jpg'. Omit for placeholder. */
   src?: string;
   alt: string;
   /** Card background this sits on, so the placeholder stays legible. */
@@ -11,11 +11,8 @@ type ProductImageProps = {
 /**
  * Product thumbnail with a built-in placeholder.
  *
- * ---------------------------------------------------------------------------
- * TODO: IMAGENS REAIS DOS PRODUTOS PENDENTES
- * ---------------------------------------------------------------------------
- * No product photography exists yet, so every catalog entry currently has no
- * `image` and renders the neutral placeholder below.
+ * Catalog entries without an `image` (photo not uploaded yet) render the
+ * neutral placeholder below.
  *
  * The placeholder is drawn in CSS + a lucide icon on purpose — no external
  * placeholder service (picsum / via.placeholder), so nothing ships a
@@ -24,14 +21,19 @@ type ProductImageProps = {
  * TO SWAP IN A REAL IMAGE (no logic changes needed):
  *   1. Drop the file in `public/images/products/` — this project serves static
  *      images from `public/images/`, which is why there is no src/assets dir.
- *   2. Set `image: '/images/products/<file>.webp'` on that item in
+ *   2. Set `image: '/images/products/<file>.jpg'` on that item in
  *      src/data/items.ts or src/data/rentals.ts.
  * Items without an `image` keep the placeholder, so the catalog can be
  * populated one product at a time.
+ *
+ * Photos are shown with object-contain on a white frame: the product shots are
+ * 3:2 infographics on white with text near the edges, so cropping to the 4:3
+ * frame would cut labels off. Keep uploads ~1000px wide on a white background.
  */
 export function ProductImage({ src, alt, tone = 'light' }: ProductImageProps) {
-  const frame =
-    tone === 'dark'
+  const frame = src
+    ? 'bg-white border-gray-100'
+    : tone === 'dark'
       ? 'bg-white/5 border-white/10'
       : 'bg-[#F3F3F1] border-gray-100';
 
@@ -45,7 +47,7 @@ export function ProductImage({ src, alt, tone = 'light' }: ProductImageProps) {
           alt={alt}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-contain"
         />
       ) : (
         /* Placeholder: neutral block + generic box icon. Decorative only —

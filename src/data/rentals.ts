@@ -34,8 +34,8 @@ export type RentalPackage = {
   /** Highlighted as the recommended package. */
   popular?: boolean;
   /**
-   * Public path to the product photo. Omitted for now — ProductImage renders a
-   * placeholder until a path is set. See the TODO in ProductImage.tsx.
+   * Public path to the product photo. Omit when there is no photo yet —
+   * ProductImage renders a placeholder. See ProductImage.tsx.
    */
   image?: string;
 };
@@ -58,10 +58,14 @@ export type RentalProgram = {
   packages: RentalPackage[];
 };
 
+// Same photo on every tote package — it is one standard tote sold in quantity.
+const TOTE_IMAGE = '/images/products/reusable-tote-red-black.jpg';
+
 const totePackages: RentalPackage[] = [
   {
     id: 'rental-totes-15',
     kind: 'totes',
+    image: TOTE_IMAGE,
     name: '15 Totes — Small Move',
     unitCount: 15,
     bestFor: 'Small Move',
@@ -72,6 +76,7 @@ const totePackages: RentalPackage[] = [
   {
     id: 'rental-totes-25',
     kind: 'totes',
+    image: TOTE_IMAGE,
     name: '25 Totes — 1 Bedroom',
     unitCount: 25,
     bestFor: '1 Bedroom',
@@ -83,6 +88,7 @@ const totePackages: RentalPackage[] = [
   {
     id: 'rental-totes-35',
     kind: 'totes',
+    image: TOTE_IMAGE,
     name: '35 Totes — 2 Bedroom',
     unitCount: 35,
     bestFor: '2 Bedroom',
@@ -93,6 +99,7 @@ const totePackages: RentalPackage[] = [
   {
     id: 'rental-totes-50',
     kind: 'totes',
+    image: TOTE_IMAGE,
     name: '50 Totes — Large Move',
     unitCount: 50,
     bestFor: 'Large Move',

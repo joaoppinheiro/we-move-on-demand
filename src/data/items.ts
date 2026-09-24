@@ -16,9 +16,9 @@ export type CatalogItem = {
   /** Optional helper line under the name. */
   note?: string;
   /**
-   * Public path to the product photo, e.g. '/images/products/small-box.webp'.
-   * Omitted for now on every item — ProductImage renders a placeholder until a
-   * path is set here. See the TODO in ProductImage.tsx for the swap-in steps.
+   * Public path to the product photo, e.g. '/images/products/small-box.jpg'.
+   * Omit when there is no photo yet — ProductImage renders a placeholder.
+   * See ProductImage.tsx for the swap-in steps.
    */
   image?: string;
 };
@@ -30,6 +30,7 @@ export const items: CatalogItem[] = [
     name: 'Small Box',
     price: 1.72,
     category: 'boxes',
+    image: '/images/products/small-box.jpg',
     note: 'Books, canned goods, small heavy items',
   },
   {
@@ -37,6 +38,7 @@ export const items: CatalogItem[] = [
     name: 'Medium Box',
     price: 2.86,
     category: 'boxes',
+    image: '/images/products/medium-box.jpg',
     note: 'The all-purpose box — kitchen, toys, decor',
   },
   {
@@ -44,6 +46,7 @@ export const items: CatalogItem[] = [
     name: 'Large Box',
     price: 3.24,
     category: 'boxes',
+    image: '/images/products/large-box.jpg',
     note: 'Linens, pillows, lampshades',
   },
   {
@@ -51,6 +54,7 @@ export const items: CatalogItem[] = [
     name: 'X-Large Box',
     price: 4.22,
     category: 'boxes',
+    image: '/images/products/x-large-box.jpg',
     note: 'Comforters, large bulky-but-light items',
   },
   {
@@ -58,6 +62,7 @@ export const items: CatalogItem[] = [
     name: 'Dish Pack Box',
     price: 5.45,
     category: 'boxes',
+    image: '/images/products/dish-pack-box.jpg',
     note: 'Double-wall protection for dishes and glassware',
   },
   {
@@ -65,6 +70,7 @@ export const items: CatalogItem[] = [
     name: 'Wardrobe Box 18"',
     price: 14.9,
     category: 'boxes',
+    image: '/images/products/wardrobe-box-18.jpg',
     note: 'Hang clothes straight from the closet',
   },
   {
@@ -72,6 +78,7 @@ export const items: CatalogItem[] = [
     name: 'Wardrobe Box 24"',
     price: 18.7,
     category: 'boxes',
+    image: '/images/products/wardrobe-box-24.jpg',
     note: 'Extra-wide wardrobe for longer garments',
   },
   {
@@ -79,6 +86,7 @@ export const items: CatalogItem[] = [
     name: 'Mirror Pack / Picture Box (4 Pieces)',
     price: 8.26,
     category: 'boxes',
+    image: '/images/products/mirror-pack.jpg',
     note: 'Adjustable 4-piece kit for mirrors, art and frames',
   },
 
@@ -88,6 +96,7 @@ export const items: CatalogItem[] = [
     name: 'Banker Box with Lid (Record Size)',
     price: 3.8,
     category: 'office',
+    image: '/images/products/banker-box-record.jpg',
     note: 'Letter/record files, archives and documents',
   },
   {
@@ -95,6 +104,7 @@ export const items: CatalogItem[] = [
     name: 'Banker Box with Lid (Legal Size)',
     price: 4.1,
     category: 'office',
+    image: '/images/products/banker-box-legal.jpg',
     note: 'Legal-size files and folders',
   },
 
@@ -111,6 +121,7 @@ export const items: CatalogItem[] = [
     name: 'Bubble Wrap Small 12"',
     price: 16.5,
     category: 'supplies',
+    image: '/images/products/bubble-wrap-small-12.jpg',
     note: 'Small bubble — fragile surfaces and scratch protection',
   },
   {
@@ -118,6 +129,7 @@ export const items: CatalogItem[] = [
     name: 'Bubble Wrap Small 24"',
     price: 31.4,
     category: 'supplies',
+    image: '/images/products/bubble-wrap-small-24.jpg',
     note: 'Small bubble, double-width roll',
   },
   {
@@ -125,6 +137,7 @@ export const items: CatalogItem[] = [
     name: 'Bubble Wrap Large 12"',
     price: 23.3,
     category: 'supplies',
+    image: '/images/products/bubble-wrap-large-12.jpg',
     note: 'Large bubble — impact cushioning for bulky items',
   },
   {
@@ -132,6 +145,7 @@ export const items: CatalogItem[] = [
     name: 'Bubble Wrap Large 24"',
     price: 46.45,
     category: 'supplies',
+    image: '/images/products/bubble-wrap-large-24.jpg',
     note: 'Large bubble, double-width roll',
   },
   {
@@ -139,6 +153,7 @@ export const items: CatalogItem[] = [
     name: 'White Packing Paper 10lb',
     price: 14.5,
     category: 'supplies',
+    image: '/images/products/white-packing-paper-10lb.jpg',
     note: 'Ink-free newsprint — wrap, cushion and fill voids',
   },
   {
@@ -146,6 +161,7 @@ export const items: CatalogItem[] = [
     name: 'White Packing Paper 25lb',
     price: 29.0,
     category: 'supplies',
+    image: '/images/products/white-packing-paper-25lb.jpg',
     note: 'Ink-free newsprint — bulk pack',
   },
   // TODO: preço avulso 50lb/75lb pendente. The 50lb and 75lb packing paper
