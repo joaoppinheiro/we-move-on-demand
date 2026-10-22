@@ -45,11 +45,13 @@ export function Footer({ hashPrefix = '' }: FooterProps) {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <img
-              src="/images/logo-white.webp"
+              src="/images/logo-white-h144.webp"
               alt="We Move On Demand"
               className="h-12 w-auto mb-6"
               loading="lazy"
               decoding="async"
+              width="130"
+              height="48"
             />
             <p className="text-gray-400 mb-4 leading-relaxed">
               Florida's premier moving company. Licensed, insured, and trusted by over 16000+ 
@@ -159,7 +161,7 @@ export function Footer({ hashPrefix = '' }: FooterProps) {
                 aria-label="View our BBB Accredited A+ profile"
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <img src="/images/bbb-logo-white.webp" alt="BBB A+ Rated" className="h-8 w-auto opacity-80" loading="lazy" decoding="async" />
+                  <img src="/images/bbb-logo-white-h96.webp" alt="BBB A+ Rated" className="h-8 w-auto opacity-80" loading="lazy" decoding="async" width="20" height="32" />
                   <div>
                     <p className="text-xs text-gray-500 uppercase tracking-wider">BBB Accredited Since 2009</p>
                     <p className="text-lg font-bold text-[#a02135]">A+ Rating · FL Reg: IM1733</p>

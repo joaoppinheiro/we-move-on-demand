@@ -37,10 +37,12 @@ export function Header() {
           {/* Logo */}
           <a href="#hero" className="flex items-center">
             <img
-              src="/images/logo.webp"
+              src="/images/logo-h120.webp"
               alt="We Move On Demand"
               className="h-10 w-auto"
               decoding="async"
+              width="108"
+              height="40"
             />
           </a>
 
