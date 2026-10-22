@@ -114,6 +114,7 @@ export const items: CatalogItem[] = [
     name: 'Packing Tape (6 Pack)',
     price: 8.34,
     category: 'supplies',
+    image: '/images/products/packing-tape-6-pack.jpg.jpg',
     note: 'Heavy-duty carton sealing tape',
   },
   {
