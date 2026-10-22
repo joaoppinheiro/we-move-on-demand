@@ -84,7 +84,7 @@ export function Hero() {
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                 aria-label="View our BBB Accredited A+ profile"
               >
-                <img src="/images/bbb-logo.webp" alt="BBB A+ Rated" className="h-10 w-auto" loading="lazy" decoding="async" />
+                <img src="/images/bbb-logo-h120.webp" alt="BBB A+ Rated" className="h-10 w-auto" loading="lazy" decoding="async" width="25" height="40" />
               </a>
             </div>
           </div>
@@ -95,7 +95,9 @@ export function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#a02135]/10 to-[#242550]/10 rounded-full blur-3xl scale-75" />
 
               <img
-                src="/images/eduardo-hero.webp"
+                src="/images/eduardo-hero-1152.webp"
+                srcSet="/images/eduardo-hero-640.webp 640w, /images/eduardo-hero-960.webp 960w, /images/eduardo-hero-1152.webp 1152w"
+                sizes="(min-width: 1280px) 576px, (min-width: 1024px) 512px, (min-width: 496px) 448px, calc(100vw - 48px)"
                 alt="Eduardo - Owner of We Move On Demand"
                 className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto drop-shadow-2xl"
                 fetchPriority="high"
